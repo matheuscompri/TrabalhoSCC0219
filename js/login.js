@@ -9,12 +9,12 @@ window.onload = function () {
 
             console.log("Campo email valido");
             //toggle the input class checked
-            var us = $("#username").removeClass("unchecked");            
+            var us = $("#username").removeClass("unchecked");
             var us = $("#username").toggleClass("checked");
-        }
-        else {
+        } else {
             //toggle the input class unchecked
-            var us = $("#username").removeClass("checked");                                 var us = $("#username").toggleClass("unchecked");
+            var us = $("#username").removeClass("checked");
+            var us = $("#username").toggleClass("unchecked");
         }
     });
 };

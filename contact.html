@@ -1,48 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Contact</title>
     <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script src="js/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="js/contact.js"></script>
 </head>
-    
+
 <body id="imh-2">
     <header>
-    <div class="navbar-container">
-        <nav class="navbar-dark">
-            <ul>
-                <span class="navbar-brand">Lithium Hotels</span>
-                <div class="nav-space"></div>
-                <div class="nav-single">
-                    <li><a href="#about">About</a></li>
-                    <li class="highlight"><a href="#">Contact</a></li>
-                </div>
-                <li>
-                    <div class="block"><label for="reg">Don't have an account?</label>
-                    <a href="#" name="reg">Register</a>
+        <div class="navbar-container">
+            <nav class="navbar-dark">
+                <ul>
+                    <span class="navbar-brand">Lithium Hotels</span>
+                    <div class="nav-space"></div>
+                    <div class="nav-single">
+                        <li><a href="#about">About</a>
+                        </li>
+                        <li class="highlight"><a href="#">Contact</a>
+                        </li>
                     </div>
-                </li>
-            </ul>
-        </nav> 
-    </div>
+                    <li>
+                        <div class="block">
+                            <label for="reg">Don't have an account?</label>
+                            <a href="#" name="reg">Register</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    
+
     <div class="wrapper">
-    <div class="container">
-        <div class="image-holder">
-            <div>
-                <fieldset class="register-box">
-                    <legend>Contact</legend>
-                    <form id="reg-form"method="GET">
+        <div class="container">
+            <div class="image-holder">
+                <div>
+                    <fieldset class="register-box">
+                        <legend>Contact</legend>
+                        <form id="contactForm" method="GET">
                             <div>
-                                <div><label for="name">Name:</label><br/><input type="text" name="mail" class="regbox-extend"/></div>
-                                <div><label for="mail">E-mail:</label><br/><input  type="text" name="mail" class="regbox-extend"/></div>
+                                <div>
+                                    <label for="name">Name:</label>
+                                    <br/>
+                                    <input type="text" name="mail" class="regbox-extend" id="contactName" />
+                                </div>
+                                <div>
+                                    <label for="mail">E-mail:</label>
+                                    <br/>
+                                    <input type="text" name="mail" class="regbox-extend" id="contactMail" />
+                                </div>
                             </div>
                             <div>
-                                <div><label for="mobile">Mobile phone:</label><br><input  type="text" name="cpf" placeholder="(XX)XXXXX-XX-XX" /></div>
-                                
+                                <div>
+                                    <label for="mobile">Mobile phone:</label>
+                                    <br>
+                                    <input type="text" name="cpf" placeholder="(XX)XXXXX-XX-XX" />
+                                </div>
+
                                 <div class="check-boxes">
                                     <fieldset>
                                         <legend>How did you hear about us?</legend>
@@ -54,43 +70,49 @@
                                         <input type="checkbox" value="newspapers">Other</input>
                                     </fieldset>
                                 </div>
-        
-                            <fieldset>
-                                <legend>Leave your Message</legend>
-                                <textarea class="contact-message" cols="60" rows="5"></textarea>
-                            </fieldset>
-                            <div class="breaker"></div>
-                                
-                            <input  class="button" type="button" value="Send"/>
-                    </form>
-                </fieldset>
+
+                                <fieldset>
+                                    <legend>Leave your Message</legend>
+                                    <textarea class="contact-message" cols="60" rows="5"></textarea>
+                                </fieldset>
+                                <div class="breaker"></div>
+
+                                <input class="button" type="button" value="Send" />
+                        </form>
+                    </fieldset>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
-    <div class="breaker"></div>
-    
-    <footer>
-    <div class="navbar-container">
-        <nav class="navbar-dark">
-            <ul>
-                <span class="navbar-brand">Lithium Hotels</span>
-                
-                    <div class="block">
-                        <div class="address">
-            42, MainStreet, TheCity<br>
-            PostCode GF 5T4<br>
-            DukesLand
-        </div>
-                        <ul class="smedia-bar">
-                            <li><img alt="follow us on twitter" src="http://cdn.flaticon.com/png/256/9148.png" border=0/></li>                             <li><img alt="follow us on facebook" src="http://cdn.flaticon.com/png/256/48470.png" border=0/></li>                             <li><img src="http://cdn.flaticon.com/png/256/7541.png"/></li>
+        <div class="breaker"></div>
 
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </nav> 
-    </div>
-    </footer>
+        <footer>
+            <div class="navbar-container">
+                <nav class="navbar-dark">
+                    <ul>
+                        <span class="navbar-brand">Lithium Hotels</span>
+
+                        <div class="block">
+                            <div class="address">
+                                42, MainStreet, TheCity
+                                <br> PostCode GF 5T4
+                                <br> DukesLand
+                            </div>
+                            <ul class="smedia-bar">
+                                <li><img alt="follow us on twitter" src="http://cdn.flaticon.com/png/256/9148.png" border=0/>
+                                </li>
+                                <li><img alt="follow us on facebook" src="http://cdn.flaticon.com/png/256/48470.png" border=0/>
+                                </li>
+                                <li><img src="http://cdn.flaticon.com/png/256/7541.png" />
+                                </li>
+
+                            </ul>
+                        </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>
 </body>
+
 </html>
