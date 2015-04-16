@@ -308,6 +308,20 @@ footer ul{
     background-image: url("../images/177_4368x2912_all-free-download.com_20513108.jpg");
 }
 
+.checked {
+    background-image: url(../images/ic_check_in.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.unchecked {
+    background-image: url(../images/ic_check_un.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 /** Styles used for validation */
 /**input:required:invalid, input:focus:invalid {
     background-image: url(../images/ic_check_un.png);
