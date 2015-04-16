@@ -1,0 +1,326 @@
+body {
+	background-color: rgb(62,89,106);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    margin: 0;
+}
+
+header{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+	color: white;
+	position: absolute;
+	font-size: 400%;
+	right: 40px;
+	bottom: 100px;
+	z-index: 2;
+}
+
+nav{
+    width: 100%;
+    min-width: 400px;
+    margin-top: 0px;
+    margin-left: -2px;
+    padding-right: 5px;
+}
+
+.block {
+    display: block;
+    margin-top: 0px;
+    text-align: center;
+}
+
+.block label{
+    margin-top: 0px;
+    color:firebrick;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;
+    margin-top: 0px;
+    min-width: 600px;
+    
+}
+
+.button {
+    background-color: rgb(178,34,34);
+    border-radius: 10px;
+    width: 20%;
+    height: 40px;
+    color: aliceblue;
+    margin-left: 40%;
+    margin-bottom: 0;
+    border-color: firebrick;
+}
+
+nav ul li{
+    padding: 5px 30px;
+
+} 
+
+.nav-space {
+    width: 55%;
+}
+
+.nav-single {
+    display: flex;
+    padding-top: 19px;
+}
+
+.navbar-brand {
+    background-color: rgba(0,0,0,0.2);
+    margin: auto 10px;
+    font-family: cursive, Verdana, sans-serif;
+    text-align: center;
+    font-size: 22px
+}
+
+.navbar-brand img{
+    width: 70px;
+}
+
+.navbar-dark {
+    background-color: rgb(12,43,63);
+    color: beige;
+}
+
+.navbar-dark a{
+    color: antiquewhite;
+}
+
+.navbar-right {
+    float: right;
+    margin-right: -15px;
+}
+
+#logForm {
+	background-color: rgba(0,0,0,0.3);
+	padding: 15px;
+}
+
+#logForm label {
+	color: white;
+    align-items: baseline;
+}
+
+.box-extend {
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+
+.regbox-extend {
+    width: 70%;
+    margin-bottom: 0%;
+    margin-left: 5px;
+}
+
+
+.register-box{
+    width: 50%;
+    height: 50%;
+    min-width: 500px;
+    background-color:rgba(178,34,34,0.6);
+    margin: auto;
+    margin-bottom: 0;
+}
+
+.reservation-box {
+    width: 50%;
+    height: 50%;
+    min-width: 500px;
+    background-color: rgba(178,34,34,0.6);
+    margin: 8% auto;
+}
+
+#reg-form {
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 0;
+    display: block;
+}
+
+.form-part {
+    margin-left: 5%;
+    margin-bottom: 2%;
+}
+
+.form-part input{
+}
+
+.form-part select{
+    margin-right: 30px;
+}
+
+.box{
+    width: 30%;
+    min-width: 250px;
+    margin: 10% 35%;
+}
+
+.login-box{
+    background-color:rgba(178,34,34,0.6);
+    color:floralwhite;
+}
+
+.breaker {
+    height: 10px;
+}
+
+legend {
+    color: maroon;
+    font-weight: bold; 
+    background-color: lightcoral;
+}
+
+form{
+    margin: 20% 0;
+    text-transform: uppercase;
+    font-size: small;
+    color: bisque;
+}
+
+.container {
+    display: flex;
+    min-width: 400px;
+    margin-bottom: 0;
+}
+
+.wrapper {
+    width:100%;
+    min-width: 400px;
+    margin: auto 1% auto 0%;
+    margin-bottom: 0;
+}
+
+.shadow-wrapper {
+    background-color: rgba(4,1,1,0.7);
+    padding-bottom: 3px;
+    padding-right: 2px;
+}
+
+
+.image-holder {
+    width: 100%;
+    height: 600px;
+    min-width: 400px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: local;
+    background-size: cover;
+}
+
+.check-boxes {
+    margin: 10px;
+    width: 90%
+}
+
+.logo {
+    margin: 30%;
+    margin-top: 10%
+}
+
+.logo img {
+ margin: auto 22%;   
+}
+
+.logo p{
+    font-family: cursive, Verdana, sans-serif;
+    font-size: 30px;
+    color: brown;
+    text-align: center;
+}
+
+.down-about {
+    display: block;
+    width: 50%;
+    margin-left: 25%;
+    background-color: rgba(200,164,133,0.7);
+}
+
+.title {
+    font-family: sans-serif;
+    font-size: 22px;
+    text-align: center;
+    
+}
+
+.description {
+    font-family: sans-serif;
+    text-align: center;
+    padding: 0% 3%;
+    font-style: normal;
+}
+
+.address {
+    width: 30%;
+    margin-top: 10px;
+    margin-left: 60%;
+    color:black;
+    font-style:oblique;
+    text-align: center;
+    padding-bottom: 15px;
+    font-weight: bold;
+
+}
+
+footer ul{
+    margin-bottom: 0;
+}
+
+.smedia-bar img{
+    width: 50px;
+}
+.smedia-bar {
+    margin-left: 40%;
+    margin-bottom: 0;
+}
+
+.highlight a{
+    color:crimson;
+}
+
+#imh-1 {
+    background-image: url(http://photoeverywhere.co.uk/britain/glasgow/princes_square_shopping_centre.jpg);
+   
+}
+
+#imh-2 {
+    background-image: url(https://farm4.staticflickr.com/3758/9011116378_32e56983e3_b.jpg);
+}
+
+#imh-3 {
+    background-image: url(https://farm4.staticflickr.com/3866/14598392170_ac019b29f8_b.jpg);
+}
+
+#imh-4 {
+    background-image: url("../images/040_5000x3750_300dpi_all-free-download.com_2977096.jpg");
+}
+
+#imh-5 {
+    background-image: url("../images/177_4368x2912_all-free-download.com_20513108.jpg");
+}
+
+/** Styles used for validation */
+/**input:required:invalid, input:focus:invalid {
+    background-image: url(../images/ic_check_un.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    -moz-box-shadow: none;
+  }
+  input:required:valid {
+    background-image: url(../images/ic_check_in.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+  }*/
+

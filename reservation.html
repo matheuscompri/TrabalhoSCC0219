@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+    
+<body id="imh-4">
+    <header>
+    <div class="navbar-container">
+        <nav class="navbar-dark">
+            <ul>
+                <span class="navbar-brand">Lithium Hotels</span>
+                <div class="nav-space"></div>
+                <div class="nav-single">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </div>
+                <li>
+                    <div class="block"><label for="reg">Already Registered?</label><br>
+                    <a href="#" name="reg">Log in</a>
+                    </div>
+                </li>
+            </ul>
+        </nav> 
+    </div>
+    </header>
+    
+    <div class="wrapper">
+    <div class="container">
+        <div class="image-holder">
+            <div>
+                <fieldset class="reservation-box">
+                    <legend>Reservation</legend>
+                    <form id="reg-form" method="GET">
+                        <fieldset class="form-part">
+                            <div>
+                                <div><label for="fname">Arriving:</label><br/><input type="date" name="arr" /></div>
+                                <div><label for="sur">Departing:</label><br/><input  type="date" name="dep" /></div>
+                            </div>
+                            </fieldset>
+                        <fieldset class="form-part">
+
+                            <div>
+                                <div><label for="adults">Adults:</label><br><select name="adults">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    </select>
+                                </div>
+                                <div><label for="babies">Children( 0y-3y ):</label><br><select name="babies">
+                                    <option>0</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    </select>
+                                </div>
+                                <div><label for="kids">Children( 4y-12y ):</label><br><select name="adults">
+                                    <option>0</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>                                                   <option>4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                        <input  class="button" type="button" value="Register"/>
+                    </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="breaker"></div>
+    <footer>
+    <div class="navbar-container">
+        <nav class="navbar-dark">
+            <ul>
+                <span class="navbar-brand">Lithium Hotels</span>
+                
+                    <div class="block">
+                        <div class="address">
+            42, MainStreet, TheCity<br>
+            PostCode GF 5T4<br>
+            DukesLand
+        </div>
+                        <ul class="smedia-bar">
+                            <li><img alt="follow us on twitter" src="http://cdn.flaticon.com/png/256/9148.png" border=0/></li>                             <li><img alt="follow us on facebook" src="http://cdn.flaticon.com/png/256/48470.png" border=0/></li>                             <li><img src="http://cdn.flaticon.com/png/256/7541.png"/></li>
+
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav> 
+    </div>
+    </footer>
+</body>
+</html>
