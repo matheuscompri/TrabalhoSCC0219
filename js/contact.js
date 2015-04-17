@@ -43,6 +43,6 @@ function is_name(name) {
 function is_mail(name) {
     //RegExp to validate e-mail
     //var mailReg = /^(([a-z])*(([a-z0-9.])+)*[a-z0-9]@([a-z0-9])+([.][a-z]+)*)$/;
-    var mailReg = /^(([a-z][.a-z0-9]*[^.])|[a-z]@[a-z0-9]+([\.][a-z]+)*)$/;
+    var mailReg = /^((([a-z][.a-z0-9]*[^.])|[a-z])@[a-z0-9]+([\.][a-z]+)*)$/;
     return mailReg.test(name);
 }
