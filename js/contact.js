@@ -5,8 +5,8 @@ window.onload = function () {
         // Getting the name
         var name = $("#contactName");
         var mail = $("#contactMail");
-        console.log(name);
-        console.log(mail);
+        var phone = $("#contactPhone");
+        
         if (is_name(name.val())) {
             valid(name);
         } else {
@@ -17,6 +17,16 @@ window.onload = function () {
             valid(mail);
         } else {
             invalid(mail);
+        }
+        
+        if (is_phone(phone.val())) {
+             console.log("valid");
+             console.log(phone.val());
+            valid(phone);
+        } else {
+            console.log("invalid");
+            invalid(phone);
+            console.log(phone.val());
         }
     });
 };
@@ -30,8 +40,8 @@ function valid(name) {
 
 function invalid(name) {
     //toggle the input class unchecked
-    name.removeClass("checked");
-    name.addClass("unchecked");
+        name.removeClass("checked");
+        name.addClass("unchecked");
 }
 
 
@@ -41,8 +51,11 @@ function is_name(name) {
 }
 
 function is_mail(name) {
-    //RegExp to validate e-mail
-    //var mailReg = /^(([a-z])*(([a-z0-9.])+)*[a-z0-9]@([a-z0-9])+([.][a-z]+)*)$/;
     var mailReg = /^((([a-z][.a-z0-9]*[^.])|[a-z])@[a-z0-9]+([\.][a-z]+)*)$/;
     return mailReg.test(name);
+}
+
+function is_phone(name) {
+    var phoneReg = /^[(][0-9]{2}[)][0-9]{5}[-][0-9]{2}[-][0-9]{2}$/;
+    return phoneReg.test(name);
 }
