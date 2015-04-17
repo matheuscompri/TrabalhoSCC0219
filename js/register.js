@@ -225,3 +225,67 @@ function is_cpf(cpf) {
         }
     }
 }
+
+function is_password(password)
+{
+    var specialChars = /[\!\@\#\$\%\*?\,\;\.]/;
+    var specCharList = [];
+    var specCharCount = 0;
+    
+    var capitalLetters = /[A-Z]/;
+    var capitalCount = 0;
+    
+    var numbers = /[0-9]/;
+    var numberCount = 0;
+    
+    if(password.length < 6 || password.length > 12)
+        return ("invalid");
+    if(password.length === 6)
+        return ("weak");
+        
+    for(var i = 0; i <= password.length; i++)
+    {
+        if(specialChars.test(password[i]))
+        {
+            specCharCount++;
+            specCharList.push(password[i]);
+        }
+        else if(capitalLetters.test(password[i]))
+        {
+            capitalCount++;
+        }
+        else if(numbers.test(password[i]))
+        {
+            numberCount++;
+        }
+    }
+    
+    // Verifying if the special chars are unique
+    for(var i = 0; i < specCharList.length; i++)
+    {
+        for(var j = i + 1; j < specCharList.length -1; j++)
+        {
+            if(specCharList[i] === specCharList[j])
+            {
+                // the special char i is not unique
+                specCharCount--;
+            }
+        }
+    }
+    
+    // Verifying if password is not weak
+    if(specCharCount && numberCount && capitalCount)
+    {
+         if(specCharCount >= 2)
+         {
+             return ("strong");
+         }
+        else{
+            return ("medium");
+        }
+    }
+    else
+    {
+        return("weak");
+    }
+}
