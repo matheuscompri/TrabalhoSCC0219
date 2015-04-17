@@ -1,7 +1,7 @@
 window.onload = function () {
     $("#registerForm").submit(function (event) {
         var valid = true;
-
+        
         // Getting the name
         var name = $("#name").val();
         var cpf = $("#cpf").val();
