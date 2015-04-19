@@ -5,6 +5,11 @@ function is_email(email) {
     return mailReg.test(email);
 }
 
+function is_phone(phone) {
+    var phoneReg = /^(|[(][0-9]{2}[)][0-9]{5}[-][0-9]{2}[-][0-9]{2})$/;
+    return phoneReg.test(phone);
+}
+
 // Function that checks if a cep matches which the right state
 function is_cep(cep, select) {
 
