@@ -12,3 +12,14 @@ input[type="checkbox"] {
 #imh-4 {
     background-image: url(../images/cover4.JPG);
 }
+
+.full {
+    background-position: center center;
+    background-size: cover;
+}
+
+.registerSection {
+    margin-top: 3%;
+    width: 30%;
+    padding: 2% 5%;
+}
