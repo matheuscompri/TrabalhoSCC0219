@@ -1,50 +1,9 @@
 window.onload = function () {
 
-    var validName = false;
-    var validMail = false;
-    var validPhone = false;
-
-    $("#contactForm").focusout(function (event) {
-
-        // Getting the name
-        var name = $("#contactName");
-        var mail = $("#contactMail");
-        var phone = $("#contactPhone");
-
-        if (is_name(name.val())) {
-            valid(name);
-            validName = true;
-            
-        } else {
-            invalid(name);
-            validName = false;
-        }
-
-        if (is_mail(mail.val())) {
-            valid(mail);
-            validMail = true;
-            
-        } else {
-            invalid(mail);
-            validMail = false;
-        }
-
-        if (is_phone(phone.val())) {
-            console.log("valid");
-            console.log(phone.val());
-            var phoneReg = /^([(][0-9]{2}[)][0-9]{5}[-][0-9]{2}[-][0-9]{2})$/;
-            validPhone = true;
-            if (phoneReg.test(phone.val())) {
-                valid(phone);
-            }
-        } else {
-            console.log("invalid");
-            invalid(phone);
-            validPhone = false;
-        }
-    });
-
     $("#contactForm").submit(function (event) {
+
+        var valid = true;
+
         //Getting access to the checkboxes status
         var news = $("#newspapers").is(":checked");
         var recc = $("#reccommendation").is(":checked");
@@ -53,67 +12,54 @@ window.onload = function () {
         var magz = $("#magazines").is(":checked");
         var othr = $("#other").is(":checked");
 
-        var msg = $("#leaveMessage");
+        var message = $("#leaveMessage").val();
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var phone = $("#phone").val();
 
         if (!(news || recc || ntwk || goog || magz || othr)) {
-            if ($("#warningCheck").length == 0) {
-                $("#checkOptions").append("<p id ='warningCheck' class='unchecked'>Please choose one of the options above</p>");
-                $("#warningCheck").css("color", "yellow");
-                $("#warningCheck").css("width", "60%");
-
-            }
-            event.preventDefault();
+            $("#checkboxLabel").html("How did you hear about us? <spam class='labelError'>(at least one should be marked!)</spam>");
+            valid = false;
         } else {
-            $("#warningCheck").remove();
+            $("#checkboxLabel").html("How did you hear about us?");
         }
 
-        if (is_empty(msg.val())) {
-            msg.attr("placeholder", "This field cannot be empty");
-            msg.css("border", "3px solid yellow");
-            event.preventDefault();
+        if (message.trim() === '') {
+            $("#leaveMessageLabel").html("Leave your message: <spam class='labelError'>(this field cannot be empty!)</spam>");
+            valid = false;
+        } else {
+            $("#leaveMessageLabel").html("Leave your message: ");
+        }
+
+        if (!is_name(name)) {
+            $("#nameLabel").html("Name: <spam class='labelError'>the name and surname must have more than 3 letters!</spam>");
+            $("#name").addClass("error");
+            valid = false;
+        } else {
+            $("#nameLabel").html("Name: ");
+            $("#name").removeClass("error");
         }
         
-        if(!(validMail && validName && validPhone)){
+        if (!is_email(email)) {
+            $("#emailLabel").html("E-mail: <spam class='labelError'>the E-mail is not valid!</spam>");
+            $("#email").addClass("error");
+            valid = false;
+        } else {
+            $("#emailLabel").html("E-mail: ");
+            $("#email").removeClass("error");
+        }
+        
+        if (!is_phone(phone)) {
+            $("#phoneLabel").html("Mobile phone: <spam class='labelError'>the phone number is not valid!</spam>");
+            $("#phone").addClass("error");
+            valid = false;
+        } else {
+            $("#phoneLabel").html("Mobile Phone: ");
+            $("#phone").removeClass("error");
+        }
+        
+        if (!valid) {
             event.preventDefault();
         }
     });
-
-
-};
-
-function valid(name) {
-    console.log("Campo " + name.val() + " valido");
-    //toggle the input class checked
-    name.removeClass("unchecked");
-    name.addClass("checked");
-}
-
-function invalid(name) {
-    //toggle the input class unchecked
-    name.removeClass("checked");
-    name.addClass("unchecked");
-}
-
-
-function is_name(name) {
-    var nameReg = /^[a-zA-Z][a-zA-Z0-9]{2}[a-zA-Z0-9]*\s[a-zA-Z][a-zA-Z0-9]{2}[a-zA-Z0-9]*$/;
-    return nameReg.test(name);
-}
-
-function is_mail(name) {
-    //RegExp to validate e-mail
-    var mailReg = /^[a-z](([a-z0-9.])*[^.])?@[a-z0-9]+([.][a-z]+)+$/;
-    return mailReg.test(name);
-}
-
-function is_phone(name) {
-    var phoneReg = /^(|[(][0-9]{2}[)][0-9]{5}[-][0-9]{2}[-][0-9]{2})$/;
-    return phoneReg.test(name);
-}
-
-function is_empty(name) {
-    if (name.length == 0) {
-        return true;
-    }
-    return false;
 }
