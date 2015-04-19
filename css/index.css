@@ -9,7 +9,7 @@ body {
 
 .logo {
     margin-top: 8%;
-    margin-bottom: 3%;
+    margin-bottom: 1%;
     /*background-color: rgba(250, 210, 10, .9);*/
     /*Style 1*/
     background-color: rgba(178, 111, 219, 0.2);
@@ -31,6 +31,7 @@ body {
     width: 50%;
     background-color: rgba(178, 111, 219, .2);
     margin-left: 25%;
+    margin-bottom: 1px;
     /*display: block;*/
     /*margin: 0px;*/
 }
