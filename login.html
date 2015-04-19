@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/login.css">
     <script type="text/javascript" src="js/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="js/validation.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
 </head>
 
@@ -33,10 +34,10 @@
         <section class="registerSection">
             <h1>Log in</h1>
             <form id="loginForm" method="POST">
-                <label for="user">Username</label>
-                <input type="email" name="user" class="box-extend" id="username" required/>
-                <label for="pass">Password</label>
-                <input class="box-extend" type="password" name="pass" id="pass" required/>
+                <label id="usernameLabel" for="user">Username</label>
+                <input type="text" name="user" class="box-extend" id="username"/>
+                <label id="passwordLabel" for="pass">Password</label>
+                <input id="password" class="box-extend" type="password" name="pass"/>
                 <input class="submit_button" type="submit" value="Log in" />
                 <input class="reset_button" type="button" value="Don't have an account?" />
             </form>
