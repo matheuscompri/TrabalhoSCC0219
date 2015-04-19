@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <script src="js/jquery-2.1.3.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/reservation.js"></script>
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/reservation.css">
 </head>
@@ -30,26 +33,26 @@
     <div class="main">
         <section class="registerSection">
             <h1>Reservation</h1>
-            <form id="reg-form" method="GET">
-                <label for="fname">Arriving:</label>
-                <input type="date" name="arr" />
-                <label for="sur">Departing:</label>
-                <input type="date" name="dep" />
+            <form id="reservationForm" method="GET">
+                <label id="arrivingLabel" for="fname">Arriving:</label>
+                <input id="arriving" type="date" name="arr" />
+                <label id="departingLabel" for="sur">Departing:</label>
+                <input id="departing" type="date" name="dep" />
                 <label for="adults">Adults:</label>
-                <select name="adults">
+                <select id="adults" name="adults">
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                     <option value="4">Four</option>
                 </select>
-                <label for="babies">Children( 0y-3y ):</label>
+                <label id="babies" for="babies">Children( 0y-3y ):</label>
                 <select name="babies">
                     <option value="0">None</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                 </select>
-                <label for="kids">Children( 4y-12y ):</label>
+                <label id="childrens" for="kids">Children( 4y-12y ):</label>
                 <select name="kids">
                     <option value="0">None</option>
                     <option value="1">One</option>
@@ -57,8 +60,8 @@
                     <option value="3">Three</option>
                     <option value="4">Four</option>
                 </select>
-                <input class="submit_button" type="button" value="Register" />
-                <input class="reset_button" type="button" value="Register" />
+                <input class="submit_button" type="submit" value="Register" />
+                <input class="reset_button" type="reset" value="Register" />
                 <div class="clear"></div>
             </form>
         </section>
