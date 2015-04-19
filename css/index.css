@@ -13,7 +13,6 @@ body {
     /*background-color: rgba(250, 210, 10, .9);*/
     /*Style 1*/
     background-color: rgba(178, 111, 219, 0.2);
-;
     text-align: center;
     font-variant: small-caps;
     font-family: serif;
@@ -56,15 +55,12 @@ footer {
     font-variant: small-caps;
     line-height: 50px;
     height: 50px;
-    /**background-color: rgb(250, 210, 10);*/
-    /*Style 1*/
-   /* background-color: rgba(196, 169, 92, 1.0);*/
-     background-color: rgba(230, 185, 61,1.0);
-
+    background-color: black;
+    
     text-align: center;
     /*color: purple;*/
     /*Style 1*/
-    color: black;
+    color: rgba(230, 185, 61,1.0);
 }
 
 footer p {

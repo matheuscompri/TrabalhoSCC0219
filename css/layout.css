@@ -155,3 +155,10 @@ textarea {
     border: solid 2px purple;
     border-bottom: solid 5px purple;
 }
+
+.full {
+    background-repeat: no-repeat; 
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+}

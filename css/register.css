@@ -7,9 +7,13 @@ body {
     font-family: sans-serif;
 }
 
-body {
-    background-image: url("../images/cover1(2).jpg");
-    background-attachment: fixed;
-    background-size: cover;
+#imh-3 {
+    background-image: url(../images/cover3.jpg);
+}
+
+.registerSection {
+    margin-top: 3%;
+    width: 35%;
+    padding: 0% 4% 2% 4%;
 }
 

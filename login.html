@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/login.js"></script>
 </head>
 
-<body>
+<body id="imh-2" class="full">
     <header>
         <div class="navbarLogo">Lithium Hotel</div>
         <nav class="navbar">
@@ -31,13 +31,14 @@
 
     <div class="main">
         <section class="registerSection">
+            <h1>Log in</h1>
             <form id="loginForm" method="POST">
                 <label for="user">Username</label>
                 <input type="email" name="user" class="box-extend" id="username" required/>
                 <label for="pass">Password</label>
                 <input class="box-extend" type="password" name="pass" id="pass" required/>
                 <input class="submit_button" type="submit" value="Log in" />
-                <input class="reset_button" type="submit" value="Don't have an account?" />
+                <input class="reset_button" type="button" value="Don't have an account?" />
             </form>
             <div class="clear"></div>
         </section>
