@@ -1,0 +1,53 @@
+body {
+    display: table;
+    width: 100%;
+    height: 100%;
+    background-attachment: fixed;
+    background-image: url("../images/cover1(2).jpg");
+    background-size: cover;
+}
+
+.logo {
+    margin-top: 8%;
+    margin-bottom: 3%;
+    background-color: rgba(250, 210, 10, .9);
+    text-align: center;
+    font-variant: small-caps;
+    font-family: serif;
+    font-size: 2em;
+    color: black;
+}
+
+.logo h1
+{
+    display: block;
+    margin: 0px;
+}
+
+.slogan
+{
+    background-color: rgba(250, 210, 10, .6);
+    text-align: center;
+    font-family: sans-serif;
+    font-variant: small-caps;
+    padding: .5%;
+}
+
+footer {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border-top: 3px solid purple;
+    font-variant: small-caps;
+    line-height: 50px;
+    height: 50px;
+    background-color: rgb(250, 210, 10);
+    text-align: center;
+    color: purple;
+}
+
+footer p {
+    padding: 0px;
+    margin: 0px;
+}

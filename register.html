@@ -6,104 +6,110 @@
     <title>Register</title>
     <script src="js/jquery-2.1.3.js"></script>
     <script src="js/register.js"></script>
+    <link rel="stylesheet" href="css/register.css">
 </head>
 
 <body>
-    <form id="registerForm" action="" method="POST">
-        <label for="name">Name:</label>
-        <br/>
-        <input id="name" type="text" name="name" />
+    <header>
+        <div class="navbarLogo">Lithium Hotel</div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Hotel</a>
+                </li>
+                <li><a href="login.html">Login</a>
+                </li>
+                <li><a href="register.html">Register</a>
+                </li>
+                <li><a href="reservation.html">Reservation</a>
+                </li>
+                <li><a href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-        <br/>
-        <label for="cpf">CPF:</label>
-        <br>
-        <input id="cpf" type="text" name="cpf" placeholder="Without Dots or Dashes" />
+    <div class="main">
 
-        <br/>
-        <label for="birth">Date of Birth:</label>
-        <br>
-        <input id="birth" type="text" name="birth" placeholder="DD/MM/YYYY" />
+        <section class="registerSection">
+            <h1>Please fill out the following form</h1>
+            <form id="registerForm" action="" method="POST">
+                <label id="nameLabel" for="name">Name:</label>
+                <input id="name" type="text" name="name" />
 
-        <br/>
-        <label for="gender">Gender:</label>
-        <br>
-        <select name="gender">
-            <option value="none">Prefer not to state</option>
-            <option value="male">Male</option>
-            <option value="fem">Female</option>
-        </select>
+                <label id="cpfLabel" for="cpf">CPF:</label>
+                <input id="cpf" type="text" name="cpf" placeholder="Without Dots or Dashes" />
 
-        <br/>
-        <label for="gender">Marital Status:</label>
-        <br>
-        <select name="marital">
-            <option value="none">Single</option>
-            <option value="male">Married</option>
-            <option value="fem">Other</option>
-        </select>
+                <label id="birthLabel" for="birth">Date of Birth:</label>
+                <input id="birth" type="text" name="birth" placeholder="DD/MM/YYYY" />
 
-        <br/>
-        <label for="city">City:</label>
-        <br>
-        <input type="text" name="city" />
+                <label for="gender">Gender:</label>
+                <select name="gender">
+                    <option value="none">Prefer not to state</option>
+                    <option value="male">Male</option>
+                    <option value="fem">Female</option>
+                </select>
 
-        <br/>
-        <label for="state">State:</label>
-        <br>
-        <select id="state" name="state">
-            <option value="">Select</option>
-            <option value="AC">Acre</option>
-            <option value="AL">Alagoas</option>
-            <option value="AP">Amapá</option>
-            <option value="AM">Amazonas</option>
-            <option value="BA">Bahia</option>
-            <option value="CE">Ceará</option>
-            <option value="DF">Distrito Federal</option>
-            <option value="ES">Espirito Santo</option>
-            <option value="GO">Goiás</option>
-            <option value="MA">Maranhão</option>
-            <option value="MS">Mato Grosso do Sul</option>
-            <option value="MT">Mato Grosso</option>
-            <option value="MG">Minas Gerais</option>
-            <option value="PA">Pará</option>
-            <option value="PB">Paraíba</option>
-            <option value="PR">Paraná</option>
-            <option value="PE">Pernambuco</option>
-            <option value="PI">Piauí</option>
-            <option value="RJ">Rio de Janeiro</option>
-            <option value="RN">Rio Grande do Norte</option>
-            <option value="RS">Rio Grande do Sul</option>
-            <option value="RO">Rondônia</option>
-            <option value="RR">Roraima</option>
-            <option value="SC">Santa Catarina</option>
-            <option value="SP">São Paulo</option>
-            <option value="SE">Sergipe</option>
-            <option value="TO">Tocantins</option>
-        </select>
+                <label for="gender">Marital Status:</label>
+                <select name="marital">
+                    <option value="none">Single</option>
+                    <option value="male">Married</option>
+                    <option value="fem">Other</option>
+                </select>
 
-        <br/>
-        <label for="postcode">Post Code:</label>
-        <br>
-        <input type="text" name="postcode" placeholder="XXXXX-XXX" />
+                <label id="cityLabel" for="city">City:</label>
+                <input id="city" type="text" name="city" />
 
-        <br/>
-        <label for="email">E-mail:</label>
-        <br>
-        <input id="email" type="text" name="email" />
-        <br/>
+                <label for="state">State:</label>
+                <select id="state" name="state">
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espirito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select>
 
-        <label for="pass">Password:</label>
-        <br>
-        <input id="password" type="password" name="pass" />
-        <br/>
+                <label id="cepLabel" for="postcode">Post Code:</label>
+                <input id="cep" type="text" name="postcode" placeholder="XXXXX-XXX" />
 
-        <label for="pass">Confirm Password:</label>
-        <br>
-        <input id="password_confirmation" onpaste="return false" type="password" name="pass" />
+                <label id="emailLabel" for="email">E-mail:</label>
+                <input id="email" type="text" name="email" />
 
-        <br/>
-        <input type="submit" value="Register" />
-    </form>
+                <label id="passwordLabel" for="pass">Password:</label>
+                <input id="password" type="password" name="pass" />
+
+                <label id="password_confirmationLabel" for="pass">Confirm Password:</label>
+                <input id="password_confirmation" onpaste="return false" type="password" name="pass" />
+
+                <input class="submit_button" type="submit" value="Register" />
+                <input class="reset_button" type="reset" value="Clear" />
+            </form>
+            <div class="clear"></div>
+
+        </section>
+
+    </div>
 </body>
 
 </html>

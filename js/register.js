@@ -1,136 +1,221 @@
 window.onload = function () {
+    
+    // Calculating the password strength
+    $("#password").keypress(function () {
+        var password = $("#password").val();
+        if (is_password(password) === 'invalid') {
+            $("#passwordLabel").html("Password: <spam class='labelError'>the password is invalid!</spam>");
+            $("#password").removeClass();
+            $("#password").addClass("error");
+        } else if (is_password(password) === 'weak') {
+            $("#passwordLabel").html("Password: <spam class='labelWeak'>the password is weak!</spam>");
+            $("#password").removeClass();
+        } else if (is_password(password) === 'medium') {
+            $("#passwordLabel").html("Password: <spam class='labelMedium'>the password is medium!</spam>");
+            $("#password").removeClass();
+        } else if (is_password(password) === 'strong') {
+            $("#passwordLabel").html("Password: <spam class='labelStrong'>the password is strong!</spam>");
+            $("#password").removeClass();
+        }
+    });
+    
+    // Checking if the form is valid when the user clicks on submit
     $("#registerForm").submit(function (event) {
         var valid = true;
-        
-        // Getting the name
+
+        // Getting the fields
         var name = $("#name").val();
         var cpf = $("#cpf").val();
         var birth = $("#birth").val();
         var password = $("#password").val();
+        var password_confirmation = $("#password_confirmation").val();
         var cep = $("#cep").val();
         var email = $("#email").val();
+        var select = $("#state").val();
+        var city = $("#city").val();
 
+        // Verifying if the fields are valid
         if (!is_name(name)) {
-            console.log("name: " + name + " " + is_name(name));
+            $("#nameLabel").html("Name: <spam class='labelError'>the name and surname must have more than 3 letters!</spam>");
+            $("#name").addClass("error");
             valid = false;
+        } else {
+            $("#nameLabel").html("Name: ");
+            $("#name").removeClass("error");
+        }
+
+        if (city.trim() === '') {
+            $("#cityLabel").html("City: <spam class='labelError'>the city is required!</spam>");
+            $("#city").addClass("error");
+            valid = false;
+        } else {
+            $("#cityLabel").html("City: ");
+            $("#city").removeClass("error");
         }
 
         if (!is_cpf(cpf)) {
-            console.log("cpf: " + cpf + " " + is_cpf(name));
+            $("#cpfLabel").html("CPF: <spam class='labelError'>the CPF is not valid!</spam>");
+            $("#cpf").addClass("error");
             valid = false;
+        } else {
+            $("#cpfLabel").html("CPF: ");
+            $("#cpf").removeClass("error");
         }
 
         if (!is_date(birth)) {
-            console.log("birthdate: " + birth + " " + is_date(birth));
+            $("#birthLabel").html("Date of Birth: <spam class='labelError'>the date is not valid!</spam>");
+            $("#birth").addClass("error");
             valid = false;
+        } else {
+            $("#birthLabel").html("Date of Birth: ");
+            $("#birth").removeClass("error");
         }
 
-        if (!is_cep(cep)) {
-            console.log("cep: " + cep + " " + is_cep(cep));
+        if (!is_cep(cep, select)) {
+            $("#cepLabel").html("Postal Code: <spam class='labelError'>the Postal Code is not valid!</spam>");
+            $("#cep").addClass("error");
             valid = false;
+        } else {
+            $("#cepLabel").html("Postal Code: ");
+            $("#cep").removeClass("error");
         }
 
         if (is_password(password) === 'invalid') {
-            console.log("password: " + password + " " + is_password(password));
+            $("#passwordLabel").html("Password: <spam class='labelError'>the password is invalid!</spam>");
+            $("#password").addClass("error");
             valid = false;
+        } else {
+            $("#passwordLabel").html("Password: ");
+            $("#password").removeClass("error");
         }
-        
+
+        if (password !== password_confirmation || password_confirmation.trim() === '') {
+            $("#password_confirmationLabel").html("Confirm Password: <spam class='labelError'>the passwords does not match!</spam>");
+            $("#password_confirmation").addClass("error");
+            valid = false;
+        } else {
+            $("#password_confirmationLabel").html("Confirm password: ");
+            $("#password_confirmation").removeClass("error");
+        }
+
         if (!is_email(email)) {
-            console.log("email: " + email + " " + is_email(email));
+            $("#emailLabel").html("E-mail: <spam class='labelError'>the E-mail is not valid!</spam>");
+            $("#email").addClass("error");
             valid = false;
+        } else {
+            $("#emailLabel").html("E-mail: ");
+            $("#email").removeClass("error");
         }
-        
+
+        // if they are not valid, prevent the form submission
         if (!valid) {
             event.preventDefault();
         }
     });
 }
 
+
+// Function that checks if the email is valid
 function is_email(email) {
     //RegExp to validate e-mail
     var mailReg = /^[a-z](([a-z0-9.])*[^.])?@[a-z0-9]+([.][a-z]+)+$/;
     return mailReg.test(email);
 }
 
-function is_cep(cep) {
-    if (cep === undefined || cep === '')
-        return false;
+// Function that checks if a cep matches which the right state
+function is_cep(cep, select) {
 
-    var cep_substring = cep.substr(0, 3);
     var state;
 
-    var select = $("#state").val();
+    var cepReg = /^[0-9]{8}$/;
+    var stateReg = /^[A-Z]{2}$/;
 
-    if ((10 <= cep_substring) && (cep_substring <= 199)) {
-        state = "SP";
-    } else if ((200 <= cep_substring) && (cep_substring <= 289)) {
-        state = "RJ";
-    } else if ((290 <= cep_substring) && (cep_substring <= 299)) {
-        state = "ES";
-    } else if ((300 <= cep_substring) && (cep_substring <= 399)) {
-        state = "MG";
-    } else if ((400 <= cep_substring) && (cep_substring <= 489)) {
-        state = "BA";
-    } else if ((490 <= cep_substring) && (cep_substring <= 499)) {
-        state = "SE";
-    } else if ((500 <= cep_substring) && (cep_substring <= 569)) {
-        state = "PE";
-    } else if ((570 <= cep_substring) && (cep_substring <= 579)) {
-        state = "AL";
-    } else if ((580 <= cep_substring) && (cep_substring <= 589)) {
-        state = "PB";
-    } else if ((590 <= cep_substring) && (cep_substring <= 599)) {
-        state = "RN";
-    } else if ((600 <= cep_substring) && (cep_substring <= 639)) {
-        state = "CE";
-    } else if ((640 <= cep_substring) && (cep_substring <= 649)) {
-        state = "PI";
-    } else if ((650 <= cep_substring) && (cep_substring <= 659)) {
-        state = "MA";
-    } else if ((660 <= cep_substring) && (cep_substring <= 688)) {
-        state = "PA";
-    } else if ((690 <= cep_substring) && (cep_substring <= 692)) {
-        state = "AM";
-    } else if ((694 <= cep_substring) && (cep_substring <= 698)) {
-        state = "AM";
-    } else if (689 === cep_substring) {
-        state = "AP";
-    } else if (693 === cep_substring) {
-        state = "AR";
-    } else if (699 === cep_substring) {
-        state = "AC";
-    } else if ((700 <= cep_substring) && (cep_substring <= 736)) {
-        state = "DF";
-    } else if ((728 <= cep_substring) && (cep_substring <= 767)) {
-        state = "GO";
-    } else if ((770 <= cep_substring) && (cep_substring <= 779)) {
-        state = "TO";
-    } else if ((780 <= cep_substring) && (cep_substring <= 788)) {
-        state = "MT";
-    } else if (789 == cep_substring) {
-        state = "RO";
-    } else if ((800 <= cep_substring) && (cep_substring <= 879)) {
-        state = "PR";
-    } else if ((880 <= cep_substring) && (cep_substring <= 889)) {
-        state = "SC";
-    } else if ((900 <= cep_substring) && (cep_substring <= 999)) {
-        state = "RS";
-    }
+    // Checking if the state and cep regex are valid for the fields
+    if (cepReg.test(cep) && stateReg.test(select)) {
 
-    if (state === select)
-        return true;
-    else
+        // The first 3 numbers define for which state the cep is
+        var cep_substring = cep.substr(0, 3);
+
+        // Checking for which state is the cep
+        if ((10 <= cep_substring) && (cep_substring <= 199)) {
+            state = "SP";
+        } else if ((200 <= cep_substring) && (cep_substring <= 289)) {
+            state = "RJ";
+        } else if ((290 <= cep_substring) && (cep_substring <= 299)) {
+            state = "ES";
+        } else if ((300 <= cep_substring) && (cep_substring <= 399)) {
+            state = "MG";
+        } else if ((400 <= cep_substring) && (cep_substring <= 489)) {
+            state = "BA";
+        } else if ((490 <= cep_substring) && (cep_substring <= 499)) {
+            state = "SE";
+        } else if ((500 <= cep_substring) && (cep_substring <= 569)) {
+            state = "PE";
+        } else if ((570 <= cep_substring) && (cep_substring <= 579)) {
+            state = "AL";
+        } else if ((580 <= cep_substring) && (cep_substring <= 589)) {
+            state = "PB";
+        } else if ((590 <= cep_substring) && (cep_substring <= 599)) {
+            state = "RN";
+        } else if ((600 <= cep_substring) && (cep_substring <= 639)) {
+            state = "CE";
+        } else if ((640 <= cep_substring) && (cep_substring <= 649)) {
+            state = "PI";
+        } else if ((650 <= cep_substring) && (cep_substring <= 659)) {
+            state = "MA";
+        } else if ((660 <= cep_substring) && (cep_substring <= 688)) {
+            state = "PA";
+        } else if ((690 <= cep_substring) && (cep_substring <= 692)) {
+            state = "AM";
+        } else if ((694 <= cep_substring) && (cep_substring <= 698)) {
+            state = "AM";
+        } else if (689 === cep_substring) {
+            state = "AP";
+        } else if (693 === cep_substring) {
+            state = "AR";
+        } else if (699 === cep_substring) {
+            state = "AC";
+        } else if ((700 <= cep_substring) && (cep_substring <= 736)) {
+            state = "DF";
+        } else if ((728 <= cep_substring) && (cep_substring <= 767)) {
+            state = "GO";
+        } else if ((770 <= cep_substring) && (cep_substring <= 779)) {
+            state = "TO";
+        } else if ((780 <= cep_substring) && (cep_substring <= 788)) {
+            state = "MT";
+        } else if (789 == cep_substring) {
+            state = "RO";
+        } else if ((800 <= cep_substring) && (cep_substring <= 879)) {
+            state = "PR";
+        } else if ((880 <= cep_substring) && (cep_substring <= 889)) {
+            state = "SC";
+        } else if ((900 <= cep_substring) && (cep_substring <= 999)) {
+            state = "RS";
+        }
+
+        // checking if the given state matches which the expected one
+        if (state === select)
+            return true;
+        else
+            return false;
+    } else
+        // cep regex or state is not valid
         return false;
 }
 
+// Function that checks if a name is valid
 function is_name(name) {
-    var nameReg = /^[a-zA-Z][a-zA-Z0-9]{2}[a-zA-Z0-9]*(\s[a-zA-Z][a-zA-Z0-9]{2}[a-zA-Z0-9]*)+$/;
+    // Regex for names with more than 3 letters and at least 1 surname
+    var nameReg = /^[a-zA-Z][a-zA-Z]{2}[a-zA-Z]*(\s[a-zA-Z][a-zA-Z]{2}[a-zA-Z]*)+$/;
     return nameReg.test(name);
 }
 
+
+// Function that checks if a birh date is valid
 function is_date(date) {
 
     var birthdate;
+    // Current time
     var now = new Date();
 
     var valid = false;
@@ -144,30 +229,83 @@ function is_date(date) {
         birthdate = new Date(date.substr(6, 4), date.substr(3, 2) - 1, date.substr(0, 2));
     }
 
-    // year after 1900 and before current year
-    if (valid && birthdate.getFullYear() >= 1900 && birthdate.getFullYear() <= now.getFullYear()) {
-        // if the year is the current one
-        if (now.getFullYear() === birthdate.getFullYear()) {
-            if (now.getMonth() >= birthdate.getMonth()) {
-                if (now.getDay() >= birthdate.getDay()) {
-                    return true;
-                }
-            }
-        } else {
-            return true;
-        }
+    // checking if is valid and if year after 1900
+    if (valid && birthdate.getFullYear() >= 1900) {
+        // Comparing the dates
+        return compareDate(birthdate, now);
     }
     return false;
 }
 
+// Compare date
+function compareDate(date, now) {
+    var valid = false;
+    
+    // Convert date to a number 
+    var dateComp = date.getMonth().toString() + date.getDate().toString();
+    var nowComp = now.getMonth().toString() + now.getDate().toString();
+
+    // Checking if the year is greater of equal than current one
+    if (date.getFullYear() >= now.getFullYear()) {
+        // If the year is the same but the day and month are smaller than the current one
+        if (date.getFullYear() === now.getFullYear() && parseInt(dateComp) <= parseInt(nowComp)) {
+            valid = true;
+        }
+    }
+    // Else the year is smaller than the current one
+    else{
+        valid = true;
+    }
+
+    return valid;
+}
+
+// This function checks if a reservation date is valid
+function reservationDate(date) {
+
+    var reservation;
+    var now = new Date();
+
+    var valid = false;
+
+    // Regular expression for date
+    var dateReg = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/;
+
+    // Testing if the regex is valid for the string
+    if (dateReg.test(date)) {
+        valid = true;
+        reservation = new Date(date.substr(6, 4), date.substr(3, 2) - 1, date.substr(0, 2));
+    }
+
+    if (valid) {
+        // Converts the months and days in a integer
+        var dateComp = reservation.getMonth().toString() + reservation.getDate().toString();
+        var nowComp = now.getMonth().toString() + now.getDate().toString();
+
+        // Checking if the reservation is not wrong (for previous years)
+        if (reservation.getFullYear() >= now.getFullYear()) {
+            // Checking if the month and days are greater for the reservation (+2 days is a restriction)
+            if (parseInt(dateComp) >= parseInt(nowComp) + 2) {
+                return true;
+            }
+        }
+    }
+    return false;
+
+}
+
+// Function to check if a cpf is valid
+// This function recalculates the last 2 digits of the cpf
+// If they match which the given ones, then the cpf is valid
 function is_cpf(cpf) {
-    // Converting to string to simplify access to numbers
     var string = cpf;
     var sum = 0;
     var dig = 0;
 
+    // Getting the first 9 numbers
     var new_cpf = cpf.substr(0, 9);
-
+    
+    // Checking if the size is valid
     if (cpf.length === 11) {
         for (var i = 0; i < 9; i++) {
             sum += cpf[i] * (10 - i);
@@ -199,6 +337,7 @@ function is_cpf(cpf) {
     }
 }
 
+// Function to verify the strengh of the password
 function is_password(password) {
     var specialChars = /[\!\@\#\$\%\*?\,\;\.]/;
     var specCharList = [];
@@ -210,18 +349,24 @@ function is_password(password) {
     var numbers = /[0-9]/;
     var numberCount = 0;
 
+    // Checking if the size is valid
     if (password.length < 6 || password.length > 12)
         return ("invalid");
+    // Weak passwords have only 6 chars
     if (password.length === 6)
         return ("weak");
 
+    // Checking all the chars of the password
     for (var i = 0; i <= password.length; i++) {
         if (specialChars.test(password[i])) {
+            // The password has a special character
             specCharCount++;
             specCharList.push(password[i]);
         } else if (capitalLetters.test(password[i])) {
+            // The password has a capital letter
             capitalCount++;
         } else if (numbers.test(password[i])) {
+            // The password has a number
             numberCount++;
         }
     }
@@ -238,6 +383,7 @@ function is_password(password) {
 
     // Verifying if password is not weak
     if (specCharCount && numberCount && capitalCount) {
+        // More than 2 special chars results in a strong password
         if (specCharCount >= 2) {
             return ("strong");
         } else {
