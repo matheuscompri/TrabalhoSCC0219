@@ -1,26 +1,33 @@
 window.onload = function () {
 
-    $("#loginForm").focusout(function (event) {
+    $("#loginForm").submit(function (event) {
+
+        var valid = false;
 
         // Getting the username
         var username = $("#username").val();
+        var password = $("#password").val();
 
-        if (is_mail(username)) {
-
-            console.log("Campo email valido");
-            //toggle the input class checked
-            var us = $("#username").removeClass("unchecked");
-            var us = $("#username").toggleClass("checked");
+        if (!is_email(username)) {
+            $("#usernameLabel").html("Username <spam class='labelError'>(email is not valid!)</spam>");
+            $("#username").addClass("error");
+            valid = false;
         } else {
-            //toggle the input class unchecked
-            var us = $("#username").removeClass("checked");
-            var us = $("#username").toggleClass("unchecked");
+            $("#usernameLabel").html("Username");
+            $("#username").removeClass("error");
+        }
+
+        if (password.trim() === '') {
+            $("#passwordLabel").html("Password <spam class='labelError'>(password field is empty!)</spam>");
+            $("#password").addClass("error");
+            valid = false;
+        } else {
+            $("#passwordLabel").html("Username");
+            $("#password").removeClass("error");
+        }
+        
+        if (!valid) {
+            event.preventDefault();
         }
     });
 };
-
-function is_mail(username) {
-    //RegExp to validate e-mail
-    var mailReg = /^([a-z]([a-z0-9.])+[a-z0-9]@([a-z0-9])+([.][a-z]+)*)$/;
-    return mailReg.test(username);
-}
