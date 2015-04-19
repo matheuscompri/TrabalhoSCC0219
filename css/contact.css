@@ -8,3 +8,7 @@
 input[type="checkbox"] {
     width: auto;
 }
+
+#imh-4 {
+    background-image: url(../images/cover4.JPG);
+}
