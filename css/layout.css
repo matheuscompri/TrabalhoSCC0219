@@ -26,8 +26,10 @@ body {
 }
 
 .navbar {
-    border-bottom: 3px solid purple;
-    background-color: rgb(250, 210, 10);
+    border-bottom: 3px solid rgba(178, 111, 219, 0.4);
+    /*background-color: rgb(250, 210, 10);*/   
+    background-color: black;
+
     display: block;
     height: auto;
     box-shadow: 1px;
@@ -46,7 +48,7 @@ body {
     font-size: 1.3em;
     line-height: 50px;
     color: rgb(250, 210, 10);
-    background-color: purple;
+    background-color: rgba(178, 111, 219, 0.4);
 }
 
 .navbar ul {
@@ -63,7 +65,7 @@ body {
 
 .navbar a:hover {
     border-bottom: white 3px solid;
-    background-color: mediumpurple;
+    background-color: rgba(178, 111, 219, 0.4);
     color: white;
 }
 
@@ -73,6 +75,7 @@ body {
     display: block;
     line-height: 50px;
     text-decoration: none;
+    color: rgba(230, 185, 61,1.0);
 }
 
 .main {
@@ -86,15 +89,15 @@ body {
 
 .registerSection {
     margin: auto;
-    margin-top: 20px;
+    margin-top: 8%;
     border: solid 1px purple;
     border-left: solid 5px purple;
     padding-left: 8%;
     padding-right: 8%;
     padding-bottom: 2%;
     padding-top: 2%;
-    width: 40%;
-    background-color: lavender;
+    width: 31%;
+    background-color: rgba(230,230,250,0.7);
     font-variant: small-caps;
     color: purple;
     font-weight: 450;
