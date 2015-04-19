@@ -11,6 +11,10 @@ body {
     background-image: url(../images/cover3.jpg);
 }
 
+.full {
+    background-position: center;
+}
+
 .registerSection {
     margin-top: 3%;
     width: 35%;

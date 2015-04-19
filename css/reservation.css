@@ -1,3 +1,7 @@
 #imh-1 {
-    background-image: url("../images/040_5000x3750_300dpi_all-free-download.com_2977096.jpg");
+    background-image: url("../images/cover5.jpg");
+}
+
+.full {
+    background-position: bottom;
 }

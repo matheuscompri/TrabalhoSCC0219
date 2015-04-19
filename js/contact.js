@@ -26,9 +26,12 @@ window.onload = function () {
 
         if (message.trim() === '') {
             $("#leaveMessageLabel").html("Leave your message: <spam class='labelError'>(this field cannot be empty!)</spam>");
+            $("#leaveMessage").addClass("error");
             valid = false;
         } else {
             $("#leaveMessageLabel").html("Leave your message: ");
+            $("#leaveMessage").removeClass("error");
+
         }
 
         if (!is_name(name)) {
@@ -39,7 +42,7 @@ window.onload = function () {
             $("#nameLabel").html("Name: ");
             $("#name").removeClass("error");
         }
-        
+
         if (!is_email(email)) {
             $("#emailLabel").html("E-mail: <spam class='labelError'>the E-mail is not valid!</spam>");
             $("#email").addClass("error");
@@ -48,7 +51,7 @@ window.onload = function () {
             $("#emailLabel").html("E-mail: ");
             $("#email").removeClass("error");
         }
-        
+
         if (!is_phone(phone)) {
             $("#phoneLabel").html("Mobile phone: <spam class='labelError'>the phone number is not valid!</spam>");
             $("#phone").addClass("error");
@@ -57,7 +60,7 @@ window.onload = function () {
             $("#phoneLabel").html("Mobile Phone: ");
             $("#phone").removeClass("error");
         }
-        
+
         if (!valid) {
             event.preventDefault();
         }
