@@ -25,7 +25,7 @@
                     <li>
                         <div class="block">
                             <label for="reg">Don't have an account?</label>
-                            <a href="#" name="reg">Register</a>
+                            <a href="register.html" name="reg">Register</a>
                         </div>
                     </li>
                 </ul>
@@ -39,7 +39,7 @@
                 <div>
                     <fieldset class="register-box">
                         <legend>Contact</legend>
-                        <form id="contactForm" method="GET">
+                        <form id="contactForm" action="" method="POST">
                             <div>
                                 <div>
                                     <label for="name">Name:</label>
@@ -56,28 +56,29 @@
                                 <div>
                                     <label for="mobile">Mobile phone:</label>
                                     <br>
-                                    <input type="text" name="cpf" placeholder="(XX)XXXXX-XX-XX" />
+                                    <input type="text" name="mobile" class="" placeholder="(XX)XXXXX-XX-XX" id="contactPhone" />
                                 </div>
 
                                 <div class="check-boxes">
-                                    <fieldset>
+                                    <fieldset id="checkOptions">
                                         <legend>How did you hear about us?</legend>
-                                        <input type="checkbox" value="newspapers">Newspapers</input>
-                                        <input type="checkbox" value="newspapers">Recommendation</input>
-                                        <input type="checkbox" value="newspapers">Social Networks</input>
-                                        <input type="checkbox" value="newspapers">Google Search</input>
-                                        <input type="checkbox" value="newspapers">Magazines</input>
-                                        <input type="checkbox" value="newspapers">Other</input>
+                                        <input type="checkbox" value="newspapers" id="newspapers">Newspapers</input>
+                                        <input type="checkbox" value="reccomendation" id="reccommendation">Recommendation</input>
+                                        <input type="checkbox" value="social_network" id="social_network">Social Networks</input>
+                                        <input type="checkbox" value="google_search" id="google_search">Google Search</input>
+                                        <input type="checkbox" value="magazines" id="magazines">Magazines</input>
+                                        <input type="checkbox" value="other" id="other">Other</input>
+
                                     </fieldset>
                                 </div>
 
                                 <fieldset>
                                     <legend>Leave your Message</legend>
-                                    <textarea class="contact-message" cols="60" rows="5"></textarea>
+                                    <textarea class="contact-message" cols="60" rows="5" id="leaveMessage"></textarea>
                                 </fieldset>
                                 <div class="breaker"></div>
 
-                                <input class="button" type="button" value="Send" />
+                                <input class="button" type="submit" value="Send" id="contactSend" />
                         </form>
                     </fieldset>
                     </div>

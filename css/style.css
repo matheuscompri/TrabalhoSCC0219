@@ -147,6 +147,13 @@ nav ul li{
     display: block;
 }
 
+#contactForm {
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 0;
+    display: block;
+}
+
 .form-part {
     margin-left: 5%;
     margin-bottom: 2%;
@@ -218,8 +225,10 @@ form{
 }
 
 .check-boxes {
+    text-transform: capitalize;
+    font-size: 14px;
     margin: 10px;
-    width: 90%
+    width: 95%;
 }
 
 .logo {
