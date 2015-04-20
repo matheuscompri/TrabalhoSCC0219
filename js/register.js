@@ -33,7 +33,9 @@ window.onload = function () {
         var email = $("#email").val();
         var select = $("#state").val();
         var city = $("#city").val();
-
+        var gender = $("#gender").val();
+        var mstatus = $("#mstatus").val();
+        
         // Verifying if the fields are valid
         if (!is_name(name)) {
             $("#nameLabel").html("Name: <spam class='labelError'>the name and surname must have more than 3 letters!</spam>");
@@ -111,6 +113,8 @@ window.onload = function () {
         // if they are not valid, prevent the form submission
         if (!valid) {
             event.preventDefault();
+            var register = {"name" : name, "cpf" : cpf, "birhdate" : birth, "gender" : gender, "mstatus" : mstatus, "city" : city, "state" : select, "cep" : cep, "email" : email, "password" : password};
+            saveData("register", JSON.stringify(register));
         }
     });
 }
