@@ -33,6 +33,15 @@ window.onload = function () {
         // if they are not valid, prevent the form submission
         if (!valid) {
             event.preventDefault();
+        } else {
+            var reservation = {
+                "arriving": arr,
+                "departing": dep,
+                "adults": adults,
+                "babies": babies,
+                "childrens": childrens,
+            };
+            saveData("reservation", JSON.stringify(reservation));
         }
     });
 }
