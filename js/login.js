@@ -2,13 +2,13 @@ window.onload = function () {
 
     $("#loginForm").submit(function (event) {
 
-        var valid = false;
-
+        var valid = true;
         // Getting the username
         var username = $("#username").val();
         var password = $("#password").val();
 
         if (!is_email(username)) {
+
             $("#usernameLabel").html("Username <spam class='labelError'>(email is not valid!)</spam>");
             $("#username").addClass("error");
             valid = false;
@@ -25,9 +25,15 @@ window.onload = function () {
             $("#passwordLabel").html("Username");
             $("#password").removeClass("error");
         }
-        
+
         if (!valid) {
             event.preventDefault();
+        } else {
+            var login = {
+                "username": username,
+                "password": password,
+            };
+            saveData("login", JSON.stringify(login));
         }
     });
 };

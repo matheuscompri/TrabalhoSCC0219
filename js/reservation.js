@@ -22,7 +22,7 @@ window.onload = function () {
         }
 
         if (!reservationDate(dep, arr)) {
-            $("#departingLabel").html("Departing: <spam class='labelError'>the departure date shold be at least 2 days from from arriving date!</spam>");
+            $("#departingLabel").html("Departing: <spam class='labelError'>the departing date shold be at least 2 days from from arriving date!</spam>");
             $("#departing").addClass("error");
             valid = false;
         } else {
@@ -33,6 +33,15 @@ window.onload = function () {
         // if they are not valid, prevent the form submission
         if (!valid) {
             event.preventDefault();
+        } else {
+            var reservation = {
+                "arriving": arr,
+                "departing": dep,
+                "adults": adults,
+                "babies": babies,
+                "childrens": childrens,
+            };
+            saveData("reservation", JSON.stringify(reservation));
         }
     });
 }
