@@ -286,3 +286,7 @@ function is_password(password) {
         return ("weak");
     }
 }
+
+function saveData(nome, dado) {
+    localStorage.setItem(nome,dado);
+}

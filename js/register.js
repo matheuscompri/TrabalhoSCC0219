@@ -42,6 +42,7 @@ window.onload = function () {
         } else {
             $("#nameLabel").html("Name: ");
             $("#name").removeClass("error");
+            saveData("nome",name);
         }
 
         if (city.trim() === '') {
@@ -113,3 +114,5 @@ window.onload = function () {
         }
     });
 }
+
+
