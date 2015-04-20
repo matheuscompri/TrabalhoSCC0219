@@ -149,9 +149,34 @@ function compareDate(date, now) {
 }
 
 // This function checks if a reservation date is valid
-function reservationDate(date, date2) {
+function arrivalDate(date) {
 
-    var reservation, currentDate;
+    var arrival, now = new Date();
+
+    var valid = false;
+
+    // Regular expression for date
+    var dateReg = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/;
+
+    // Testing if the regex is valid for the string
+    if (dateReg.test(date)) {
+        valid = true;
+        arrival = new Date(date.substr(6, 4), date.substr(3, 2) - 1, date.substr(0, 2));
+    }
+    if (valid) {
+        now.setDate(now.getDate() + 2);
+        if (now <= arrival) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+// This function checks if a reservation date is valid
+function departureDate(date, date2) {
+
+    var arrival, departure;
 
     var valid = false;
 
@@ -161,31 +186,21 @@ function reservationDate(date, date2) {
     // Testing if the regex is valid for the string
     if (dateReg.test(date) && dateReg.test(date2)) {
         valid = true;
-        reservation = new Date(date.substr(6, 4), date.substr(3, 2) - 1, date.substr(0, 2));
-        currentDate = new Date(date2.substr(6, 4), date2.substr(3, 2) - 1, date2.substr(0, 2));
+        arrival = new Date(date.substr(6, 4), date.substr(3, 2) - 1, date.substr(0, 2));
+        departure = new Date(date2.substr(6, 4), date2.substr(3, 2) - 1, date2.substr(0, 2));
     }
 
     if (valid) {
-        // Converts the months and days in a integer
-        var dateComp = date.substr(3, 2) + date.substr(0, 2);
-        var date2Comp = date2.substr(3, 2) + date2.substr(0, 2);
-
-        // Checking if the reservation is not wrong (for previous years)
-        if (reservation.getFullYear() >= currentDate.getFullYear()) {
-
-            // Checking if the month and days are greater for the reservation (+2 days is a restriction)
-            if (reservation.getFullYear() === currentDate.getFullYear()) {
-
-                if (parseInt(dateComp) >= parseInt(date2Comp) + 2) {
-                    return true;
-                }
-            } else {
-                return true;
-            }
+        arrival.setDate(arrival.getDate() + 2);
+        if (arrival <= departure) {
+            return true;
+        } else {
+            return false;
         }
     }
-    return false;
 }
+
+
 
 // Function to check if a cpf is valid
 // This function recalculates the last 2 digits of the cpf
@@ -288,5 +303,5 @@ function is_password(password) {
 }
 
 function saveData(nome, dado) {
-    localStorage.setItem(nome,dado);
+    localStorage.setItem(nome, dado);
 }

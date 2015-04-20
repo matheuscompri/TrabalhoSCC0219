@@ -63,6 +63,20 @@ window.onload = function () {
 
         if (!valid) {
             event.preventDefault();
+         } else {
+            var contact = {
+                "name": name,
+                "email": email,
+                "phone": phone,
+                "newspapers": news,
+                "reccommendation": recc,
+                "social_network": ntwk,
+                "google_search": goog,
+                "magazines": magz,
+                "other": othr,
+                "message": message
+            };
+            saveData("contact", JSON.stringify(contact));
         }
     });
 }
