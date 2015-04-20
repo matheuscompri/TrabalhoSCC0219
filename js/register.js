@@ -1,5 +1,5 @@
 window.onload = function () {
-    
+
     // Calculating the password strength
     $("#password").keypress(function () {
         var password = $("#password").val();
@@ -18,7 +18,7 @@ window.onload = function () {
             $("#password").removeClass();
         }
     });
-    
+
     // Checking if the form is valid when the user clicks on submit
     $("#registerForm").submit(function (event) {
         var valid = true;
@@ -35,7 +35,7 @@ window.onload = function () {
         var city = $("#city").val();
         var gender = $("#gender").val();
         var mstatus = $("#mstatus").val();
-        
+
         // Verifying if the fields are valid
         if (!is_name(name)) {
             $("#nameLabel").html("Name: <spam class='labelError'>the name and surname must have more than 3 letters!</spam>");
@@ -44,7 +44,7 @@ window.onload = function () {
         } else {
             $("#nameLabel").html("Name: ");
             $("#name").removeClass("error");
-            saveData("nome",name);
+            saveData("nome", name);
         }
 
         if (city.trim() === '') {
@@ -113,10 +113,20 @@ window.onload = function () {
         // if they are not valid, prevent the form submission
         if (!valid) {
             event.preventDefault();
-            var register = {"name" : name, "cpf" : cpf, "birhdate" : birth, "gender" : gender, "mstatus" : mstatus, "city" : city, "state" : select, "cep" : cep, "email" : email, "password" : password};
+        } else {
+            var register = {
+                "name": name,
+                "cpf": cpf,
+                "birhdate": birth,
+                "gender": gender,
+                "mstatus": mstatus,
+                "city": city,
+                "state": select,
+                "cep": cep,
+                "email": email,
+                "password": password
+            };
             saveData("register", JSON.stringify(register));
         }
     });
 }
-
-
