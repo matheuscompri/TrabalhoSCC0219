@@ -10,6 +10,25 @@ function is_phone(phone) {
     return phoneReg.test(phone);
 }
 
+// Function that captalize the first letters of the name
+function fixName(name) {
+    // Spliting the string using the empty spaces
+    var array = name.split(" ");
+    // New name
+    var newName = "";
+
+    // for each word besides the last one
+    for (var i = 0; i < array.length - 1; i++) {
+        // Captalizing the first letter and adding a white space in the end
+        newName += array[i][0].toUpperCase() + array[i].substr(1, array[i].length - 1) + " ";
+    }
+    // The last word doesn't have the empty space in the end
+    newName += array[array.length - 1][0].toUpperCase() + array[i].substr(1, array[i].length - 1);
+
+    // Returning the new name
+    return newName;
+}
+
 // Function that checks if a cep matches which the right state
 function is_cep(cep, select) {
 

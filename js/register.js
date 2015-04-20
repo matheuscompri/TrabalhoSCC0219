@@ -1,7 +1,7 @@
 window.onload = function () {
 
     // Calculating the password strength
-    $("#password").keypress(function () {
+    $("#password").keyup(function () {
         var password = $("#password").val();
         if (is_password(password) === 'invalid') {
             $("#passwordLabel").html("Password: <spam class='labelError'>the password is invalid!</spam>");
@@ -115,7 +115,7 @@ window.onload = function () {
             event.preventDefault();
         } else {
             var register = {
-                "name": name,
+                "name": fixName(name),
                 "cpf": cpf,
                 "birhdate": birth,
                 "gender": gender,
