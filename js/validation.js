@@ -128,8 +128,9 @@ function is_date(date) {
     var valid = false;
 
     // Regular expression for date
-    var dateReg = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/;
+    var dateReg = /^(([0][1-9])|([1-2][0-9])|([3][0-1]))\/(([0][1-9])|([1][0-2]))\/((19|[2-9][0-9])[0-9]{2})$/;
 
+    
     // Testing if the regex is valid for the string
     if (dateReg.test(date)) {
         valid = true;
