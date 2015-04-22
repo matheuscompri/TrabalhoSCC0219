@@ -9,7 +9,7 @@ window.onload = function () {
         var dep = $("#departing").val();
         var adults = $("#adults").val();
         var babies = $("#babies").val();
-        var childrens = $("#childrens").val();
+        var children = $("#children").val();
 
         // Verifying if the fields are valid
         if (!arrivalDate(arr)) {
@@ -39,7 +39,7 @@ window.onload = function () {
                 "departing": dep,
                 "adults": adults,
                 "babies": babies,
-                "childrens": childrens,
+                "children": children,
             };
             saveData("reservation", JSON.stringify(reservation));
         }
