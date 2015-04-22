@@ -22,7 +22,7 @@ window.onload = function () {
             $("#password").addClass("error");
             valid = false;
         } else {
-            $("#passwordLabel").html("Username");
+            $("#passwordLabel").html("Password");
             $("#password").removeClass("error");
         }
 
