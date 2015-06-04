@@ -28,12 +28,6 @@ window.onload = function () {
 
         if (!valid) {
             event.preventDefault();
-        } else {
-            var login = {
-                "username": username,
-                "password": password,
-            };
-            saveData("login", JSON.stringify(login));
         }
     });
 };

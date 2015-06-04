@@ -27,7 +27,6 @@ body {
 
 .navbar {
     border-bottom: 3px solid rgba(178, 111, 219, 0.4);
-    /*background-color: rgb(250, 210, 10);*/   
     background-color: black;
 
     display: block;
@@ -76,6 +75,16 @@ body {
     line-height: 50px;
     text-decoration: none;
     color: rgba(230, 185, 61,1.0);
+}
+
+.navbar .username {
+    width: 150px;
+    text-align: center;
+    display: block;
+    line-height: 50px;
+    text-decoration: none;
+    background-color: rgba(178, 111, 219, 0.4);
+    color: white;
 }
 
 .main {
