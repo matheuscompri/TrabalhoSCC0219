@@ -23,6 +23,11 @@
 </head>
 
 <body id="imh-1" class="full">
+    <%-- Redirecting not allowed users --%>
+    <c:if test="${currentUser.name == null }">
+        <c:redirect url="permissionDenied.jsp" />
+    </c:if>
+
     <header>
         <div class="navbarLogo">Lithium Hotel</div>
         <nav class="navbar">

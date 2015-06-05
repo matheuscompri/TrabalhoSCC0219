@@ -9,20 +9,16 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Editor Clientes</title>
-	<%-- Setting the base url based on context --%>
-    <base href="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" />
-    
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/contact.css">
-</head>
-<body>
-    <%-- Redirecting not allowed users --%>
-    <c:if test="${currentUser.administrator != true }">
-        <c:redirect url="permissionDenied.jsp" />
-    </c:if>
+	<head>
+		<title>Permission Denied</title>
+		<%-- Setting the base url based on context --%>
+	    <base href="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" />
+	    
+	    <link rel="stylesheet" href="css/layout.css">
+	    <link rel="stylesheet" href="css/index.css">
+	</head>
 
+	<body>
 	<header>
         <div class="navbarLogo">Lithium Hotel</div>
         <nav class="navbar">
@@ -66,28 +62,11 @@
 
      <div class="main">
         <section class="registerSection">
-			<h1>Edit Client</h1>
-			<jsp:useBean id="get" class="hotel.User" scope="session" />
-
-			<form action="/Projeto/hotel/RegisterController" method="POST">
-				Nome: <input type="text" id="name" name="name" value="${get.name}"><br/>
-				CPF: <input type="text" id="cpf" name="cpf" value="${get.cpf}"><br/>
-                Date of Birth: <input type="text" id="dateOfBirth" name="dateOfBirth" value="${get.dateOfBirth}"><br/>
-                Gender: <input type="text" id="gender" name="gender" value="${get.gender}"><br/>
-                Marital Status: <input type="text" id="maritalStatus" name="maritalStatus" value="${get.maritalStatus}"><br/>
-                City: <input type="text" id="city" name="city" value="${get.city}"><br/>
-                State: <input type="text" id="state" name="state" value="${get.state}"><br/>
-                Postal Code: <input type="text" id="postalCode" name="postalCode" value="${get.postalCode}"><br/>
-				Email: <input type="text" id="email" name="email" value="${get.email}"><br/>
-				Password: <input type="password" id="password" name="password" value="${get.password}"><br/>
-				<input type="hidden" name="editId" value="${get.id}" />
-				<input type="hidden" name="action" value="edit" />
-
-				<input type="submit" class="submit_button" value="Save Changes">
-                <input type="button" class="reset_button" value="Discard" onClick="location.href = '/Projeto/clientList.jsp'" />
-			</form>
-			<div class="clear"></div>
+			<h1>Permission Denied</h1>
+			You are not allowed to access this page.
 		</section>
-	</div>
-</body>
+	</main>
+	</body>
 </html>
+
+

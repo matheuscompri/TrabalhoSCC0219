@@ -60,7 +60,7 @@ public class LoginController extends HttpServlet
 			session.setAttribute("currentUser", currentUser);
 			
 			// Creating the url
-			url = "clientList.jsp";
+			url = "index.jsp";
 		}
 		else
 		{
