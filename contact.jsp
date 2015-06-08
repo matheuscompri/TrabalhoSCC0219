@@ -8,7 +8,7 @@
 <c:set var="url" >${req.requestURL}</c:set>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 
 <head>
     <title>Contact</title>
@@ -68,33 +68,33 @@
     <div class="main">
         <section class="registerSection">
             <h1>Contact</h1>
-            <form id="contactForm" action="" method="POST">
+            <form id="contactForm" action="/Projeto/hotel/MessageController" method="POST">
                 <label id="nameLabel" for="name">Name:</label>
-                <input id="name" type="text" name="mail" class="regbox-extend" />
+                <input id="name" type="text" name="name" class="regbox-extend" />
 
-                <label id="emailLabel" for="mail">E-mail:</label>
-                <input id="email" type="text" name="mail" class="regbox-extend" />
+                <label id="emailLabel" for="email">E-mail:</label>
+                <input id="email" type="text" name="email" class="regbox-extend" />
 
-                <label id="phoneLabel" for="mobile">Mobile phone:</label>
-                <input id="phone" type="text" name="mobile" class="" placeholder="(XX)XXXXX-XX-XX" />
+                <label id="phoneLabel" for="phone">Mobile phone:</label>
+                <input id="phone" type="text" name="phone" class="" placeholder="(XX)XXXXX-XX-XX" />
 
                 <label id="checkboxLabel" for="">How did you hear about us?</label>
                 <div id="aligning">
                     <div class="checkboxGroup">
-                        <input type="checkbox" value="newspapers" id="newspapers">Newspapers<br>
-                        <input type="checkbox" value="reccomendation" id="reccommendation">Recommendation<br>
+                        <input type="checkbox" name="newspaper" id="newspapers">Newspapers<br>
+                        <input type="checkbox" name="recomendation" id="recommendation">Recommendation<br>
                                         
-                        <input type="checkbox" value="social_network" id="social_network">Social Networks
-                        </div>
-                        <div class="checkboxGroup">
-                        <input type="checkbox" value="google_search" id="google_search">Google Search<br>
-                        <input type="checkbox" value="magazines" id="magazines">Magazines<br>
-                        <input type="checkbox" value="other" id="other">Other
+                        <input type="checkbox" name="socialNetworks" id="socialNetwork">Social Networks
+                    </div>
+                    <div class="checkboxGroup">
+                        <input type="checkbox" name="googleSearch" id="googleSearch">Google Search<br>
+                        <input type="checkbox" name="magazines" id="magazines">Magazines<br>
+                        <input type="checkbox" name="other" id="other">Other
                     </div>
                 </div>
 
                 <label id="leaveMessageLabel" for="textarea">Leave your message:</label>
-                <textarea id="leaveMessage" class="contact-message" cols="60" rows="5" name="textarea"></textarea>
+                <textarea id="leaveMessage" class="contact-message" cols="60" rows="5" name="message"></textarea>
                 <input class="submit_button" type="submit" value="Send" />
                 <input class="reset_button" type="reset" value="Clear" />
             </form>

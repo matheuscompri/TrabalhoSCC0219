@@ -47,7 +47,7 @@ public class MessageController extends HttpServlet
 		session.setAttribute("messageList", messageList);
 
 		// Creating the url
-		String url = "messageList.jsp";
+		String url = "index.jsp";
 	
 		try
 		{

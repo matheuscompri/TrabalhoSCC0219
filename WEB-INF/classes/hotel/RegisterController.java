@@ -55,7 +55,7 @@ public class RegisterController extends HttpServlet
 			clientList.add(client);
 
 			// Creating the url
-			url = "clientList.jsp";
+			url = "login.jsp";
 		}
 		else if(request.getParameter("action").toString().equals("edit"))
 		{
