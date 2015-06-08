@@ -8,22 +8,40 @@ public class Reservation
 	private User client;
 
 	// Arrival
-	private Date arrival;
+	private Calendar arrival;
 
 	// Departure
-	private Date departure;
+	private Calendar departure;
+
+	//number of people
+	private Integer adults;
+	private Integer children;
+	private Integer babies;
+
 
 	// Setters
 	public void setClient(User client){
 		this.client = client;
 	}
 
-	public void setArrival(Date arrival){
+	public void setArrival(Calendar arrival){
 		this.arrival = arrival;
 	}
 
-	public void setDeparture(Date departure){
+	public void setDeparture(Calendar departure){
 		this.departure = departure;
+	}
+
+	public void setAdults(Integer adults){
+		this.adults = adults;
+	}
+
+	public void setChildren(Integer children){
+		this.children = children;
+	}
+
+	public void setBabies(Integer babies){
+		this.babies = babies;
 	}
 
 	// Getters
@@ -31,11 +49,23 @@ public class Reservation
 		return this.client;
 	}
 
-	public Date getArrival(){
+	public Calendar getArrival(){
 		return this.arrival;
 	}
 
-	public Date getDeparture(){
+	public Calendar getDeparture(){
 		return this.departure;
+	}
+
+	public Integer getAdults(){
+		return this.adults;
+	}
+	
+	public Integer getChildren(){
+		return this.children;
+	}
+
+	public Integer getBabies(){
+		return this.babies;
 	}
 }

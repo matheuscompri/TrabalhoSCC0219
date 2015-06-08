@@ -67,7 +67,7 @@
     <div class="main">
         <section class="registerSection">
             <h1>Reservation</h1>
-            <form id="reservationForm" method="POST">
+            <form id="reservationForm" action="/Projeto/hotel/ReservationController" method="POST">
                 <label id="arrivingLabel" for="fname">Arriving:</label>
                 <input id="arriving" type="text" name="arr" />
                 <label id="departingLabel" for="sur">Departing:</label>
@@ -94,6 +94,9 @@
                     <option value="3">Three</option>
                     <option value="4">Four</option>
                 </select>
+
+                <input type="hidden" name="action" value="reservation" />
+
                 <input class="submit_button" type="submit" value="Register" />
                 <input class="reset_button" type="reset" value="Clear" />
                 <div class="clear"></div>
