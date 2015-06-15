@@ -34,25 +34,27 @@
 				<td></td>
 			</tr>
 			<c:forEach var="reservation" items="${reservationList}" varStatus="status">
-				<tr>
-					<td><input type="checkbox" name="mdel${status.index}"</td>
-					<td>${status.index}</td>
-					<td>${reservation.client.name}</td>
-					<td>${reservation.arrival.time}</td>
-					<td>${reservation.departure.time}</td>
-					<td>${reservation.adults}</td>
-					<td>${reservation.children}</td>
-					<td>${reservation.babies}</td>
-					<td><a href="/Projeto/hotel/ReservationController?action=get&next=view&id=${status.index}">Details</a></td>
-					<td><a href="/Projeto/hotel/ReservationController?action=get&next=edit&id=${status.index}">Edit</a></td>
-					<td><a href="/Projeto/hotel/ReservationController?action=del&id=${status.index}">Remove</a></td>
-				</tr>
+				<c:if test = "${currentUser.name == reservation.client.name || currentUser.administrator == true }">
+					<tr>
+						<td><input type="checkbox" name="mdel${status.index}"</td>
+						<td>${status.index}</td>
+						<td>${reservation.client.name}</td>
+						<td>${reservation.arrival.time}</td>
+						<td>${reservation.departure.time}</td>
+						<td>${reservation.adults}</td>
+						<td>${reservation.children}</td>
+						<td>${reservation.babies}</td>
+						<td><a href="/Projeto/hotel/ReservationController?action=get&next=view&id=${status.index}">Details</a></td>
+						<td><a href="/Projeto/hotel/ReservationController?action=get&next=edit&id=${status.index}">Edit</a></td>
+						<td><a href="/Projeto/hotel/ReservationController?action=del&id=${status.index}">Remove</a></td>
+					</tr>
+				</c:if>
 			</c:forEach>
 		</table>
 		<input type="hidden" name="action" value="mdel">
 		<input type="submit" value="Delete Selected">
 	</form>
-	<a href="/Projeto/index.html">Novo Cliente</a>
+	<a href="/Projeto/reservation.jsp">Nova reserva</a>
 
 	</body>
 </html>

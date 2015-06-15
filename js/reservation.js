@@ -1,5 +1,13 @@
 window.onload = function () {
 
+        $("#arriving").datepicker({
+            dateFormat:"dd/mm/yy"
+        });
+
+        $("#departing").datepicker({
+            dateFormat:"dd/mm/yy"
+        });
+
     // Checking if the form is valid when the user clicks on submit
     $("#reservationForm").submit(function (event) {
         var valid = true;
@@ -10,6 +18,7 @@ window.onload = function () {
         var adults = $("#adults").val();
         var babies = $("#babies").val();
         var children = $("#children").val();
+
 
         // Verifying if the fields are valid
         if (!arrivalDate(arr)) {

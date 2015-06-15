@@ -102,23 +102,24 @@ public class ReservationController extends HttpServlet
 			// Getting the current id
 			int id = Integer.parseInt(request.getParameter("editId").toString());
 
-			User client = (User) clientList.get(id);
-
-			client.setName(request.getParameter("name"));
-			client.setCpf(request.getParameter("cpf"));
-			client.setDateOfBirth(request.getParameter("dateOfBirth"));
-			client.setGender(request.getParameter("gender"));
-			client.setMaritalStatus(request.getParameter("maritalStatus"));
-			client.setCity(request.getParameter("city"));
-			client.setState(request.getParameter("state"));
-			client.setPostalCode(request.getParameter("postalCode"));
-			client.setEmail(request.getParameter("email"));
-			client.setPassword(request.getParameter("password"));
-			client.setCreationDate();
-
+			Reservation res = lithium.getReservations().get(id);
+			String arrival = request.getParameter("arr");
+			String departure = request.getParameter("dep");
+			String [] arr = arrival.split("/");
+			String [] dep = departure.split("/");
+			
+			Calendar arrDate = new GregorianCalendar(Integer.parseInt(arr[2]),Integer.parseInt(arr[1]),Integer.parseInt(arr[0]));
+			Calendar depDate = new GregorianCalendar(Integer.parseInt(dep[2]),Integer.parseInt(dep[1]),Integer.parseInt(dep[0]));
+			
+			res.setClient(client);
+			res.setArrival(arrDate);
+			res.setDeparture(depDate);
+			res.setAdults(Integer.parseInt(request.getParameter("adults")));
+			res.setChildren(Integer.parseInt(request.getParameter("kids")));
+			res.setBabies(Integer.parseInt(request.getParameter("babies")));
 			// Creating the url
-			url = "clientList.jsp";
-		}
+			url = "ReservationList.jsp";
+		}/*
 		else
 		{
 			url = "error.jsp";
@@ -152,11 +153,12 @@ public class ReservationController extends HttpServlet
 			session.setAttribute("clientList", new ArrayList<User>());
 		}
 
+		/*
 		// Recovering the client List from the session
 		ArrayList<User> clientList = (ArrayList) session.getAttribute("clientList");
 
 		// Checking the request type
-		// If the action is edit, get info from client (used in editClient.jsp)
+		// If the action is edit, get info from reservation (used in editReservation.jsp)
 		if(request.getParameter("action").toString().equals("get"))
 		{
 			// Getting the current id

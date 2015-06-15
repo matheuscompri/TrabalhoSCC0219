@@ -17,7 +17,9 @@
 
     <script src="js/jquery-2.1.3.js"></script>
     <script src="js/validation.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <script src="js/reservation.js"></script>
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/reservation.css">
 </head>
@@ -74,9 +76,9 @@
             <h1>Reservation</h1>
             <form id="reservationForm" action="/Projeto/hotel/ReservationController" method="POST">
                 <label id="arrivingLabel" for="fname">Arriving:</label>
-                <input id="arriving" type="text" name="arr" />
+                <input type="text" id="arriving" name="arr" />
                 <label id="departingLabel" for="sur">Departing:</label>
-                <input id="departing" type="text" name="dep" />
+                <input id="departing" name="dep" />
                 <label for="adults">Adults:</label>
                 <select id="adults" name="adults">
                     <option value="1">One</option>

@@ -68,4 +68,5 @@ public class Reservation
 	public Integer getBabies(){
 		return this.babies;
 	}
+
 }
