@@ -22,6 +22,7 @@ public class LoginController extends HttpServlet
 			admin.setEmail("admin@hotel.com");
 			admin.setPassword("admin");
 			admin.setAdministrator(true);
+			admin.setCreationDate();
 
 			// Adding the admin to the client list
 			clientList.add(admin);

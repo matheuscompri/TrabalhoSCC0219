@@ -25,6 +25,7 @@ public class RegisterController extends HttpServlet
 			admin.setName("Administrator");
 			admin.setEmail("admin@hotel.com");
 			admin.setPassword("admin");
+			admin.setCreationDate();
 			admin.setAdministrator(true);
 
 			// Adding the admin to the client list
@@ -230,6 +231,8 @@ public class RegisterController extends HttpServlet
 
 					for(User client : clientList)
 					{
+						System.out.println("client " + client.getName() + " " + client.getCreationDate());
+
 						if(client.getCreationDate().after(after) && client.getCreationDate().before(before))
 						{
 							searchResults.add(client);
