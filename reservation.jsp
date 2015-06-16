@@ -50,7 +50,7 @@
                     <c:otherwise>
                         <li><spam class="username">${currentUser.name}</spam></li>
                         <li><a href="/Projeto/hotel/LoginController?action=logout">Logout</a></li>
-                        <li><a href="reservation.jsp">Reservations</a></li>
+                        <li><a href="reservationList.jsp">Reservations</a></li>
                         
                         <c:choose>
                             <%-- Admin --%>
