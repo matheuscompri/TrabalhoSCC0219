@@ -97,38 +97,6 @@ public class ReservationController extends HttpServlet
 				
 			}
 		}
-		/*else if(request.getParameter("action").toString().equals("edit"))
-		{
-			// Getting the current id
-			int id = Integer.parseInt(request.getParameter("editId").toString());
-
-			Reservation res = lithium.getReservations().get(id);
-			String arrival = request.getParameter("arr");
-			String departure = request.getParameter("dep");
-			String [] arr = arrival.split("/");
-			String [] dep = departure.split("/");
-			
-			Calendar arrDate = new GregorianCalendar(Integer.parseInt(arr[2]),Integer.parseInt(arr[1]),Integer.parseInt(arr[0]));
-			Calendar depDate = new GregorianCalendar(Integer.parseInt(dep[2]),Integer.parseInt(dep[1]),Integer.parseInt(dep[0]));
-			
-			res.setClient(client);
-			res.setArrival(arrDate);
-			res.setDeparture(depDate);
-			res.setAdults(Integer.parseInt(request.getParameter("adults")));
-			res.setChildren(Integer.parseInt(request.getParameter("kids")));
-			res.setBabies(Integer.parseInt(request.getParameter("babies")));
-			// Creating the url
-			url = "ReservationList.jsp";
-		}/*
-		else
-		{
-			url = "error.jsp";
-		}
-
-		// Updating the client list
-		session.setAttribute("clientList", clientList);
-
-		*/
 		try
 		{
 			// Redirecting
@@ -142,52 +110,31 @@ public class ReservationController extends HttpServlet
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response){
+		
+		// get an instance of the hotel
+		Hotel lithium = Hotel.getInstance();
 
-		/*String url = null;
+		// Session
+		HttpSession session = request.getSession();
 
-		// Loading current session
-		HttpSession session = request.getSession(true);
-		// if there is no clientList create one
-		if(session.getAttribute("clientList") == null)
-		{
-			session.setAttribute("clientList", new ArrayList<User>());
-		}
+		// get reservations
+		ArrayList <Reservation> reservations = lithium.getReservations();
 
-		/*
-		// Recovering the client List from the session
-		ArrayList<User> clientList = (ArrayList) session.getAttribute("clientList");
+		String url = null;
 
 		// Checking the request type
-		// If the action is edit, get info from reservation (used in editReservation.jsp)
 		if(request.getParameter("action").toString().equals("get"))
 		{
 			// Getting the current id
 			int id = Integer.parseInt(request.getParameter("id").toString());
 
-			User client = (User) clientList.get(id);
+			Reservation res = (Reservation) reservations.get(id);
 
-			// Temporary id for editing purpouses
-			client.setId(id);
-
-			// Saving the client info on session
-			session.setAttribute("get", client);
-
-			// Creating the url
-			if(request.getParameter("next").equals("view"))
-			{
-				// View
-				url = "viewClient.jsp";
-			}
-			else if(request.getParameter("next").equals("edit"))
-			{
-				// Edit 
-				url = "editClient.jsp";
-			}
-			else
-			{
-				// Error
-				url = "error.jsp";
-			}
+			// Saving the reservation info on session
+			session.setAttribute("get", res);
+			
+			// View
+			url = "viewReservation.jsp";
 		}
 		// If action is delete a single entry
 		else if(request.getParameter("action").toString().equals("del"))
@@ -196,28 +143,29 @@ public class ReservationController extends HttpServlet
 			int id = Integer.parseInt(request.getParameter("id").toString());
 			
 			// Removing the client
-			clientList.remove(id);
+			reservations.remove(id);
 
 			// Saving the updated client list
-			session.setAttribute("clientList", clientList);
+			session.setAttribute("reservations", reservations);
+			System.out.println("remove: " + id);
 			
 			// Creating the url
-			url = "clientList.jsp";
+			url = "reservationList.jsp";
 		}
 		// If action is delete multiple entries
 		else if(request.getParameter("action").toString().equals("mdel"))
 		{
 			String mdel;
-			ArrayList<User> toBeDeleted = new ArrayList<User>();
+			ArrayList<Reservation> toBeDeleted = new ArrayList<Reservation>();
 
-			for(int i = 0; i < clientList.size(); i++)
+			for(int i = 0; i < reservations.size(); i++)
 			{
 				// Checking if there are any mdel0, mdel1, mdel2...
 				mdel = request.getParameter("mdel" + i);
 				if(mdel != null)
 				{
 					// adding the client to the deletion array
-					toBeDeleted.add( (User) clientList.get(i));
+					toBeDeleted.add( (Reservation) reservations.get(i));
 					// This is necessary because the indexes change if we delete the clients here
 				}
 			}
@@ -226,71 +174,15 @@ public class ReservationController extends HttpServlet
 			for(int i = 0; i < toBeDeleted.size(); i++)
 			{
 				// Safely removing users
-				clientList.remove(toBeDeleted.get(i));
+				reservations.remove(toBeDeleted.get(i));
 			}
 
 			// Updating client list
-			session.setAttribute("clientList", clientList);
+			session.setAttribute("reservations", reservations);
 			
 			// Creating the url
-			url = "clientList.jsp";
+			url = "reservationList.jsp";
 
-		}
-		else if(request.getParameter("action").toString().equals("search"))
-		{
-			// Search results to be returned
-			ArrayList<User> searchResults = new ArrayList<User>();
-
-			// Checking what kind of search is this
-			if(request.getParameter("method").equals("name"))
-			{
-				// Name to be searched
-				String name = request.getParameter("name");
-
-				// Checking if the string matches the name
-				for(User client : clientList)
-				{
-					if(client.getName().toLowerCase().contains(name))
-					{
-						searchResults.add(client);
-					}
-				}
-			}
-			else if(request.getParameter("method").equals("date"))
-			{
-				// Date format
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-				// Range
-				Date after;
-				Date before;
-				
-				try
-				{
-					// Converting the parameters to date
-					after = dateFormat.parse(request.getParameter("after"));
-					before = dateFormat.parse(request.getParameter("before"));
-
-					for(User client : clientList)
-					{
-						if(client.getCreationDate().after(after) && client.getCreationDate().before(before))
-						{
-							searchResults.add(client);
-						}
-					}
-				}
-				catch(ParseException e)
-				{
-					e.printStackTrace();
-				}
-
-			}
-
-			// Filtering the clientList
-			session.setAttribute("searchResults", searchResults);
-
-			// Creating the url
-			url = "searchResults.jsp";
 		}
 		else
 		{
@@ -306,6 +198,6 @@ public class ReservationController extends HttpServlet
 		catch(Exception e)
 		{
 			e.printStackTrace();
-		}*/
+		}
 	}
 }

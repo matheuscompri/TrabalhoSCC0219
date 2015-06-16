@@ -14,9 +14,9 @@ public class Reservation
 	private Calendar departure;
 
 	//number of people
-	private Integer adults;
-	private Integer children;
-	private Integer babies;
+	private int adults;
+	private int children;
+	private int babies;
 
 
 	// Setters
@@ -57,15 +57,15 @@ public class Reservation
 		return this.departure;
 	}
 
-	public Integer getAdults(){
+	public int getAdults(){
 		return this.adults;
 	}
 	
-	public Integer getChildren(){
+	public int getChildren(){
 		return this.children;
 	}
 
-	public Integer getBabies(){
+	public int getBabies(){
 		return this.babies;
 	}
 
