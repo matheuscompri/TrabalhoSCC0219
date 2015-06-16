@@ -167,6 +167,22 @@ public class RegisterController extends HttpServlet
 		{
 			String mdel;
 			ArrayList<User> toBeDeleted = new ArrayList<User>();
+	
+			// Serach results ArrayList
+			ArrayList<User> searchResults;
+
+			// if there is no clientList create one
+			if(session.getAttribute("searchResults") == null)
+			{
+				searchResults = new ArrayList<User>();
+				session.setAttribute("searchResults", searchResults);
+			}
+
+			// Recovering the client List from the session
+			searchResults = (ArrayList) session.getAttribute("searchResults");
+
+			// Verifying if it came from searchResults.jsp
+			boolean isSearchResult = request.getParameter("searchResults").equals("true");
 
 			for(int i = 0; i < clientList.size(); i++)
 			{
@@ -174,9 +190,19 @@ public class RegisterController extends HttpServlet
 				mdel = request.getParameter("mdel" + i);
 				if(mdel != null)
 				{
-					// adding the client to the deletion array
-					toBeDeleted.add( (User) clientList.get(i));
-					// This is necessary because the indexes change if we delete the clients here
+					// Verifying if it is a search result or client list
+					if(isSearchResult)
+					{
+						// adding the client to the deletion array
+						toBeDeleted.add( (User) searchResults.get(i));
+						// This is necessary because the indexes change if we delete the clients here
+					}
+					else
+					{
+						// adding the client to the deletion array
+						toBeDeleted.add( (User) clientList.get(i));
+						// This is necessary because the indexes change if we delete the clients here
+					}
 				}
 			}
 
