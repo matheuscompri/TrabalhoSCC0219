@@ -53,8 +53,8 @@ public class ReservationController extends HttpServlet
 			String [] arr = arrival.split("/");
 			String [] dep = departure.split("/");
 			
-			Calendar arrDate = new GregorianCalendar(Integer.parseInt(arr[2]),Integer.parseInt(arr[1]),Integer.parseInt(arr[0]));
-			Calendar depDate = new GregorianCalendar(Integer.parseInt(dep[2]),Integer.parseInt(dep[1]),Integer.parseInt(dep[0]));
+			Calendar arrDate = new GregorianCalendar(Integer.parseInt(arr[2]),Integer.parseInt(arr[1]) - 1,Integer.parseInt(arr[0]));
+			Calendar depDate = new GregorianCalendar(Integer.parseInt(dep[2]),Integer.parseInt(dep[1]) - 1,Integer.parseInt(dep[0]));
 			
 
 			res.setClient(client);
@@ -81,7 +81,7 @@ public class ReservationController extends HttpServlet
 				for(Reservation r : temp){
 					
 					if((res.getArrival().compareTo(r.getArrival())>=0) && (res.getArrival().compareTo(r.getDeparture())<= 0)){
-						url = "error.jsp";
+						url = "invalidReservationError.jsp";
 						flag = false;		
 					}
 					
