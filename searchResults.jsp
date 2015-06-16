@@ -92,7 +92,8 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<input type="hidden" name="action" value="mdel">
+                <input type="hidden" name="action" value="mdel">
+				<input type="hidden" name="searchResults" value="true">
                 <input type="submit" class="submit_button" value="Delete Selected" />
                 <input type="button" class="reset_button" value="Return to list" onClick="location.href = '/Projeto/clientList.jsp'" />
                 <div class="clear"></div>
