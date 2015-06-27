@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="hotel.User" table="hotel_users">
+        <id column="user_id" name="id">
+            <generator class="native"/>
+        </id>
+        <property column="user_name" name="name"/>
+        <property column="user_cpf" name="cpf"/>
+        <property column="user_birthDate" name="dateOfBirth"/>
+        <property column="user_gender" name="gender"/>
+        <property column="user_maritalStatus" name="maritalStatus"/>
+        <property column="user_city" name="city"/>
+        <property column="user_state" name="state"/>
+        <property column="user_postalCode" name="postalCode"/>
+        <property column="user_email" name="email"/>
+        <property column="user_password" name="password"/>
+    </class>      
+</hibernate-mapping>

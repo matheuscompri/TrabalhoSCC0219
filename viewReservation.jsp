@@ -18,11 +18,6 @@
     <link rel="stylesheet" href="css/contact.css">
 </head>
 <body>
-    <%-- Redirecting not allowed users --%>
-    <c:if test="${currentUser.administrator != true }">
-        <c:redirect url="permissionDenied.jsp" />
-    </c:if>
-    
 	<header>
         <div class="navbarLogo">Lithium Hotel</div>
         <nav class="navbar">
@@ -70,6 +65,14 @@
 
 			<h1>Reservation details</h1>
 			<jsp:useBean id="get" class="hotel.Reservation" scope="session" />
+
+            <%-- Redirecting not allowed users --%>
+            <c:if test="${currentUser.name == null}">
+                <c:redirect url="permissionDenied.jsp" />
+            </c:if>
+            <c:if test="${ currentUser.name != get.client.name && currentUser.administrator != true}">
+                <c:redirect url="permissionDenied.jsp" />
+            </c:if> 
 
             Name: ${get.client.name}<br/>
             Arrival Date: ${get.arrival.time}<br/>

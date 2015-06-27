@@ -6,10 +6,51 @@ import javax.servlet.http.*;
 import java.util.*;
 import java.text.*;
 
+import org.hibernate.*;
+import org.hibernate.cfg.*;
+
 public class RegisterController extends HttpServlet
 {
+	private static SessionFactory factory;
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 	{
+
+		try{
+        	factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+        }catch (Throwable ex) { 
+        	System.err.println("Failed to create sessionFactory object." + ex);
+        	throw new ExceptionInInitializerError(ex);
+       	}
+
+       	Session session1 = factory.openSession();
+       	Transaction tx = null;
+       	try
+       	{
+       		tx = session1.beginTransaction();
+       		User user1 = new User();
+			user1.setName("Administrator2");
+			user1.setEmail("admin2@hotel.com");
+			user1.setPassword("admin2");
+			user1.setCreationDate();
+			user1.setAdministrator(true);       	
+			session1.save(user1);
+			tx.commit();
+		}
+		catch(HibernateException e)
+		{
+			if(tx != null)
+			{
+				tx.rollback();
+				e.printStackTrace();
+			}
+		}
+		finally
+		{
+			session1.close();
+		}
+
+		/* ============================ */
 		ArrayList<User> clientList = new ArrayList<User>();
 		// url
 		String url = null;
@@ -230,11 +271,15 @@ public class RegisterController extends HttpServlet
 			{
 				// Name to be searched
 				String name = request.getParameter("name");
+				if(request.getParameter("name") == null)
+				{
+					name = "";
+				}
 
 				// Checking if the string matches the name
 				for(User client : clientList)
 				{
-					if(client.getName().toLowerCase().contains(name))
+					if(client.getName().toLowerCase().contains(name.toLowerCase()))
 					{
 						searchResults.add(client);
 					}
