@@ -107,11 +107,11 @@
 					</tr>
 					<c:forEach var="cliente" items="${clientList}" varStatus="status">
 						<tr>
-							<td><input type="checkbox" name="mdel${status.index}"</td>
+							<td><input type="checkbox" name="mdel${cliente.id}"</td>
 							<td>${cliente.name}</td>
-							<td><a href="/Projeto/hotel/RegisterController?action=get&next=view&id=${status.index}">Details</a></td>
-							<td><a href="/Projeto/hotel/RegisterController?action=get&next=edit&id=${status.index}">Edit</a></td>
-							<td><a href="/Projeto/hotel/RegisterController?action=del&id=${status.index}">Remove</a></td>
+							<td><a href="/Projeto/hotel/RegisterController?action=get&next=view&id=${cliente.id}">Details</a></td>
+							<td><a href="/Projeto/hotel/RegisterController?action=get&next=edit&id=${cliente.id}">Edit</a></td>
+							<td><a href="/Projeto/hotel/RegisterController?action=del&id=${cliente.id}">Remove</a></td>
 						</tr>
 					</c:forEach>
 				</table>

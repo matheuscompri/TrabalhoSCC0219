@@ -5,15 +5,91 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.*;
 
+import org.hibernate.*;
+import org.hibernate.cfg.*;
+
 public class LoginController extends HttpServlet
 {
+	private static SessionFactory factory;
+
+	// Method to create an user in the database 
+	public Integer addUser(User user)
+	{
+		Session session = factory.openSession();
+		Transaction tx = null;
+		Integer userId = null;
+		try
+		{
+	    	tx = session.beginTransaction();
+	    	session.save(user);
+	    	tx.commit();
+		}
+		catch (HibernateException e) 
+		{
+	    	if (tx!=null) tx.rollback();
+	    	e.printStackTrace();
+	  	}
+	  	finally
+	  	{
+	     	session.close();
+		}
+		return userId;
+	}
+
+	// Method that list all users
+	public List<User> listUsers(){
+		List<User> clientList = null;
+
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try
+		{
+	    	tx = session.beginTransaction();
+	    	clientList = session.createQuery("FROM User").list(); 
+	    	System.out.println("Database: ");
+	    	for (User cl : clientList)
+	    	{
+		        System.out.println("Id: " + cl.getId()); 
+		        System.out.println("Name: " + cl.getName()); 
+	    	}
+	     	tx.commit();
+
+	     	return clientList;
+
+	  	}
+	  	catch (HibernateException e)
+	  	{
+	     	if (tx!=null) tx.rollback();
+	     	e.printStackTrace(); 
+	  	}
+	  	finally
+	  	{
+	     	session.close(); 
+	  	}
+	  	return clientList;
+	}
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response){
 
-		ArrayList<User> clientList = new ArrayList<User>();
-		// Loading current session
-		HttpSession session = request.getSession();
+		
+		try
+		{
+        	factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+        }
+        catch (Throwable ex)
+        { 
+        	System.err.println("Failed to create sessionFactory object." + ex);
+        	throw new ExceptionInInitializerError(ex);
+       	}
+
+       	// Saving the Clientlist
+    	List<User> clientList = listUsers();
+
+		// url
+		String url = "error.jsp";
+
 		// if there is no clientList create one
-		if(session.getAttribute("clientList") == null)
+		if(clientList.isEmpty())
 		{
 			// Creating admin user
 			User admin = new User();
@@ -21,16 +97,12 @@ public class LoginController extends HttpServlet
 			admin.setName("Administrator");
 			admin.setEmail("admin@hotel.com");
 			admin.setPassword("admin");
-			admin.setAdministrator(true);
 			admin.setCreationDate();
+			admin.setAdministrator(true);
 
 			// Adding the admin to the client list
-			clientList.add(admin);
-			session.setAttribute("clientList", clientList);
+			addUser(admin);
 		}
-
-		// Recovering the client List from the session
-		clientList = (ArrayList) session.getAttribute("clientList");
 
 		// Getting the username
 		String username = request.getParameter("username");
@@ -51,8 +123,8 @@ public class LoginController extends HttpServlet
 			}
 		}
 
-		// Url
-		String url;
+		// Loading current session
+		HttpSession session = request.getSession();
 
 		// If username and password are valid
 		if(currentUser != null)

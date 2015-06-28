@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="hotel.User" table="hotel_users">
+    <class name="hotel.User" table="users">
         <id column="user_id" name="id">
             <generator class="native"/>
         </id>
@@ -15,5 +15,6 @@
         <property column="user_postalCode" name="postalCode"/>
         <property column="user_email" name="email"/>
         <property column="user_password" name="password"/>
+        <property column="user_administrator" name="administrator"/>
     </class>      
 </hibernate-mapping>

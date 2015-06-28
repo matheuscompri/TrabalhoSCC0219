@@ -13,52 +13,154 @@ public class RegisterController extends HttpServlet
 {
 	private static SessionFactory factory;
 
+	// Method that return the user by userId
+	public User getUser(List<User> clientList, int userId)
+	{
+		for(User tmp : clientList)
+		{
+			if(tmp.getId() == userId)
+				return tmp;
+		}
+		return null;
+	}
+
+	// Method to create an user in the database 
+	public Integer addUser(User user)
+	{
+		Session session = factory.openSession();
+		Transaction tx = null;
+		Integer userId = null;
+		try
+		{
+	    	tx = session.beginTransaction();
+	    	session.save(user);
+	    	tx.commit();
+		}
+		catch (HibernateException e)
+		{
+	    	if (tx!=null) tx.rollback();
+	    	e.printStackTrace();
+	  	}
+	  	finally
+	  	{
+	     	session.close();
+		}
+		return userId;
+	}
+
+	// Method that list all users
+	public List<User> listUsers(){
+		List<User> clientList = null;
+
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try
+		{
+	    	tx = session.beginTransaction();
+	    	clientList = session.createQuery("FROM User").list(); 
+	    	System.out.println("Database: ");
+	    	for (User cl : clientList)
+	    	{
+		        System.out.println("Id: " + cl.getId()); 
+		        System.out.println("Name: " + cl.getName()); 
+	    	}
+	     	tx.commit();
+
+	     	return clientList;
+
+	  	}
+	  	catch (HibernateException e)
+	  	{
+	     	if (tx!=null) tx.rollback();
+	     	e.printStackTrace(); 
+	  	}
+	  	finally 
+	  	{
+	     	session.close(); 
+	  	}
+	  	return clientList;
+	}
+
+	// Method to update an user
+	public void updateUser(Integer userId, User newUser){
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try
+		{
+	    	tx = session.beginTransaction();
+	     	User user = (User) session.get(User.class, userId); 
+
+	    	user.setName(newUser.getName());
+			
+			user.setName(newUser.getName());
+			user.setCpf(newUser.getCpf());
+			user.setDateOfBirth(newUser.getDateOfBirth());
+			user.setGender(newUser.getGender());
+			user.setMaritalStatus(newUser.getMaritalStatus());
+			user.setCity(newUser.getCity());
+			user.setState(newUser.getState());
+			user.setPostalCode(newUser.getPostalCode());
+			user.setEmail(newUser.getEmail());
+			user.setPassword(newUser.getPassword());
+			user.setCreationDate();
+
+			session.update(user); 
+	    	tx.commit();
+	  	}
+	  	catch (HibernateException e)
+	  	{
+	     	if (tx!=null) tx.rollback();
+	     	e.printStackTrace(); 
+	  	}
+	  	finally
+	  	{
+	     	session.close(); 
+	  	}
+	}
+
+	// Method to delete an user
+	public void deleteUser(Integer userId)
+	{
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try
+		{
+	     	tx = session.beginTransaction();
+	     	User user = (User) session.get(User.class, userId); 
+	    	session.delete(user); 
+	    	tx.commit();
+	  	}
+	  	catch (HibernateException e)
+	  	{
+	     	if (tx!=null) tx.rollback();
+	     	e.printStackTrace(); 
+	  	}
+	  	finally
+	  	{
+	    	session.close(); 
+	  	}
+	}
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 	{
+		// Url
+		String url = "error.jsp";
 
-		try{
+		try
+		{
         	factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-        }catch (Throwable ex) { 
+        }
+        catch (Throwable ex)
+        { 
         	System.err.println("Failed to create sessionFactory object." + ex);
         	throw new ExceptionInInitializerError(ex);
        	}
 
-       	Session session1 = factory.openSession();
-       	Transaction tx = null;
-       	try
-       	{
-       		tx = session1.beginTransaction();
-       		User user1 = new User();
-			user1.setName("Administrator2");
-			user1.setEmail("admin2@hotel.com");
-			user1.setPassword("admin2");
-			user1.setCreationDate();
-			user1.setAdministrator(true);       	
-			session1.save(user1);
-			tx.commit();
-		}
-		catch(HibernateException e)
-		{
-			if(tx != null)
-			{
-				tx.rollback();
-				e.printStackTrace();
-			}
-		}
-		finally
-		{
-			session1.close();
-		}
+       	// Saving the Clientlist
+    	List<User> clientList = listUsers();
 
-		/* ============================ */
-		ArrayList<User> clientList = new ArrayList<User>();
-		// url
-		String url = null;
-
-		// Loading current session
-		HttpSession session = request.getSession();
 		// if there is no clientList create one
-		if(session.getAttribute("clientList") == null)
+		if(clientList.isEmpty())
 		{
 			// Creating admin user
 			User admin = new User();
@@ -70,12 +172,8 @@ public class RegisterController extends HttpServlet
 			admin.setAdministrator(true);
 
 			// Adding the admin to the client list
-			clientList.add(admin);
-			session.setAttribute("clientList", clientList);
+			addUser(admin);
 		}
-
-		// Recovering the client List from the session
-		clientList = (ArrayList) session.getAttribute("clientList");
 
 		if(request.getParameter("action").toString().equals("register"))
 		{
@@ -93,8 +191,8 @@ public class RegisterController extends HttpServlet
 			client.setPassword(request.getParameter("password"));
 			client.setCreationDate();
 
-			// Adding a new client to the system
-			clientList.add(client);
+			// Adding a new client
+			addUser(client);
 
 			// Creating the url
 			url = "login.jsp";
@@ -104,7 +202,7 @@ public class RegisterController extends HttpServlet
 			// Getting the current id
 			int id = Integer.parseInt(request.getParameter("editId").toString());
 
-			User client = (User) clientList.get(id);
+			User client = (User) getUser(clientList, id);
 
 			client.setName(request.getParameter("name"));
 			client.setCpf(request.getParameter("cpf"));
@@ -118,6 +216,8 @@ public class RegisterController extends HttpServlet
 			client.setPassword(request.getParameter("password"));
 			client.setCreationDate();
 
+			updateUser(id, client);
+
 			// Creating the url
 			url = "clientList.jsp";
 		}
@@ -125,9 +225,6 @@ public class RegisterController extends HttpServlet
 		{
 			url = "error.jsp";
 		}
-
-		// Updating the client list
-		session.setAttribute("clientList", clientList);
 
 		try
 		{
@@ -141,32 +238,42 @@ public class RegisterController extends HttpServlet
 		}	
 	}
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response){
-
-		String url = null;
-
-		// Loading current session
-		HttpSession session = request.getSession(true);
-		// if there is no clientList create one
-		if(session.getAttribute("clientList") == null)
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	{
+		// Url
+		String url = "error.jsp";
+		
+		try
 		{
-			session.setAttribute("clientList", new ArrayList<User>());
-		}
+        	factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+        }
+        catch (Throwable ex)
+        { 
+        	System.err.println("Failed to create sessionFactory object." + ex);
+        	throw new ExceptionInInitializerError(ex);
+       	}
 
-		// Recovering the client List from the session
-		ArrayList<User> clientList = (ArrayList) session.getAttribute("clientList");
+       	// Saving the Clientlist
+    	List<User> clientList = listUsers();
+
+    	// Loading current session
+		HttpSession session = request.getSession();
 
 		// Checking the request type
 		// If the action is edit, get info from client (used in editClient.jsp)
-		if(request.getParameter("action").toString().equals("get"))
+		if(request.getParameter("action").toString().equals("getClientList"))
+		{
+			// Saving the client List into the session
+			session.setAttribute("clientList", clientList);
+
+			url = "clientList.jsp";
+		}
+		else if(request.getParameter("action").toString().equals("get"))
 		{
 			// Getting the current id
 			int id = Integer.parseInt(request.getParameter("id").toString());
 
-			User client = (User) clientList.get(id);
-
-			// Temporary id for editing purpouses
-			client.setId(id);
+			User client = (User) getUser(clientList, id);
 
 			// Saving the client info on session
 			session.setAttribute("get", client);
@@ -195,10 +302,7 @@ public class RegisterController extends HttpServlet
 			int id = Integer.parseInt(request.getParameter("id").toString());
 			
 			// Removing the client
-			clientList.remove(id);
-
-			// Saving the updated client list
-			session.setAttribute("clientList", clientList);
+			deleteUser(id);
 			
 			// Creating the url
 			url = "clientList.jsp";
@@ -212,7 +316,7 @@ public class RegisterController extends HttpServlet
 			// Serach results ArrayList
 			ArrayList<User> searchResults;
 
-			// if there is no clientList create one
+			// if there is no searchResults create one
 			if(session.getAttribute("searchResults") == null)
 			{
 				searchResults = new ArrayList<User>();
@@ -223,40 +327,21 @@ public class RegisterController extends HttpServlet
 			searchResults = (ArrayList) session.getAttribute("searchResults");
 
 			// Verifying if it came from searchResults.jsp
-			boolean isSearchResult = request.getParameter("searchResults").equals("true");
+			boolean isSearchResult = request.getParameter("searchResults") != null;
 
-			for(int i = 0; i < clientList.size(); i++)
-			{
-				// Checking if there are any mdel0, mdel1, mdel2...
-				mdel = request.getParameter("mdel" + i);
-				if(mdel != null)
-				{
-					// Verifying if it is a search result or client list
-					if(isSearchResult)
-					{
-						// adding the client to the deletion array
-						toBeDeleted.add( (User) searchResults.get(i));
-						// This is necessary because the indexes change if we delete the clients here
-					}
-					else
-					{
-						// adding the client to the deletion array
-						toBeDeleted.add( (User) clientList.get(i));
-						// This is necessary because the indexes change if we delete the clients here
-					}
-				}
-			}
+			Enumeration enumeration = request.getParameterNames();
+        	while (enumeration.hasMoreElements()) {
+            	String parameterName = (String) enumeration.nextElement();
+            	if(parameterName.contains("mdel"))
+            	{
+            		parameterName = parameterName.replace("mdel", "");
+            		int id = Integer.parseInt(parameterName);
 
-			// Deleting itens
-			for(int i = 0; i < toBeDeleted.size(); i++)
-			{
-				// Safely removing users
-				clientList.remove(toBeDeleted.get(i));
-			}
-
-			// Updating client list
-			session.setAttribute("clientList", clientList);
-			
+            		System.out.println("Parameter: " + id);
+            		deleteUser(id);
+            	}
+        	}
+        				
 			// Creating the url
 			url = "clientList.jsp";
 

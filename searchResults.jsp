@@ -86,9 +86,9 @@
 							<td><input type="checkbox" name="mdel${status.index}"</td>
 							<td>${status.index}</td>
 							<td>${cliente.name}</td>
-							<td><a href="/Projeto/hotel/RegisterController?action=get&next=view&id=${status.index}">Details</a></td>
-							<td><a href="/Projeto/hotel/RegisterController?action=get&next=edit&id=${status.index}">Editar</a></td>
-							<td><a href="/Projeto/hotel/RegisterController?action=del&id=${status.index}">Remover</a></td>
+							<td><a href="/Projeto/hotel/RegisterController?action=get&next=view&id=${cliente.id}">Details</a></td>
+							<td><a href="/Projeto/hotel/RegisterController?action=get&next=edit&id=${cliente.id}">Editar</a></td>
+							<td><a href="/Projeto/hotel/RegisterController?action=del&id=${cliente.id}">Remover</a></td>
 						</tr>
 					</c:forEach>
 				</table>
