@@ -4,6 +4,9 @@ import java.util.Date;
 
 public class Message implements Comparable<Message>
 {
+	// message id
+	private int id;
+
 	// Message name
 	private String name;
 
@@ -31,6 +34,10 @@ public class Message implements Comparable<Message>
 	public String message;
 
 	// Setters
+	public void setId(int id){
+		this.id = id;
+	}
+
 	public void setName(String name){
 		this.name = name;
 	}
@@ -78,7 +85,16 @@ public class Message implements Comparable<Message>
 	public void setDate(){
 		this.date = new Date();
 	}
+
+	public void setDate(Date date){
+		this.date = date;
+	}
+
 	// Getters
+	public int getId(){
+		return this.id;
+	}
+	
 	public String getName(){
 		return this.name;
 	}

@@ -45,7 +45,7 @@
 					</tr>
 					<c:forEach var="message" items="${messageList}" varStatus="status">
 						<tr>
-							<td><input type="checkbox" name="mdel${status.index}" /></td>
+							<td><input type="checkbox" name="mdel${message.id}" /></td>
 							<td>
 								<c:choose>
 									<c:when test="${message.read}">
@@ -58,8 +58,8 @@
 							</td>
 							<td>${message.name}</td>
 							<td>${message.email}</td>
-							<td><a href="/Projeto/hotel/MessageController?action=get&id=${status.index}">Details</a></td>
-							<td><a href="/Projeto/hotel/MessageController?action=del&id=${status.index}">Remove</a></td>
+							<td><a href="/Projeto/hotel/MessageController?action=get&id=${message.id}">Details</a></td>
+							<td><a href="/Projeto/hotel/MessageController?action=del&id=${message.id}">Remove</a></td>
 						</tr>
 					</c:forEach>
 				</table>

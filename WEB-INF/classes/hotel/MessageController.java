@@ -5,21 +5,144 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.*;
 
+import org.hibernate.*;
+import org.hibernate.cfg.*;
+
 public class MessageController extends HttpServlet
 {
+	private static SessionFactory factory;
+	
+	// Method that return the user by userId
+	public Message getMessage(List<Message> messageList, int messageId)
+	{
+		for(Message tmp : messageList)
+		{
+			if(tmp.getId() == messageId)
+				return tmp;
+		}
+		return null;
+	}
+
+	// Method to create a message in the database 
+	public Integer addMessage(Message message)
+	{
+		Session session = factory.openSession();
+		Transaction tx = null;
+		Integer messageId = null;
+		try
+		{
+	    	tx = session.beginTransaction();
+	    	session.save(message);
+	    	tx.commit();
+		}
+		catch (HibernateException e)
+		{
+	    	if (tx!=null) tx.rollback();
+	    	e.printStackTrace();
+	  	}
+	  	finally
+	  	{
+	     	session.close();
+		}
+		return messageId;
+	}
+
+	// Method that list all messages
+	public List<Message> listMessages(){
+		List<Message> messageList = null;
+
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try
+		{
+	    	tx = session.beginTransaction();
+	    	messageList = session.createQuery("from Message order by message_date desc").list(); 
+	     	tx.commit();
+
+	     	return messageList;
+
+	  	}
+	  	catch (HibernateException e)
+	  	{
+	     	if (tx!=null) tx.rollback();
+	     	e.printStackTrace(); 
+	  	}
+	  	finally 
+	  	{
+	     	session.close(); 
+	  	}
+	  	return messageList;
+	}
+
+	// Method to update a message
+	public void updateReadStatus(Integer messageId, boolean status){
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try
+		{
+	    	tx = session.beginTransaction();
+	     	Message message = (Message) session.get(Message.class, messageId); 
+
+	    	message.setRead(status);
+			
+			session.update(message); 
+	    	tx.commit();
+	  	}
+	  	catch (HibernateException e)
+	  	{
+	     	if (tx!=null) tx.rollback();
+	     	e.printStackTrace(); 
+	  	}
+	  	finally
+	  	{
+	     	session.close(); 
+	  	}
+	}
+
+	// Method to delete a message
+	public void deleteMessage(Integer messageId)
+	{
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try
+		{
+	     	tx = session.beginTransaction();
+	     	Message message = (Message) session.get(Message.class, messageId); 
+	    	session.delete(message); 
+	    	tx.commit();
+	  	}
+	  	catch (HibernateException e)
+	  	{
+	     	if (tx!=null) tx.rollback();
+	     	e.printStackTrace(); 
+	  	}
+	  	finally
+	  	{
+	    	session.close(); 
+	  	}
+	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 	{
+
+		// Creating the url
+		String url = "index.jsp";
+
+		try
+		{
+        	factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+        }
+        catch (Throwable ex)
+        { 
+        	System.err.println("Failed to create sessionFactory object." + ex);
+        	throw new ExceptionInInitializerError(ex);
+       	}
+
 		// Loading current session
 		HttpSession session = request.getSession();
-		// if there is no messageList create one
-		if(session.getAttribute("messageList") == null)
-		{
-			session.setAttribute("messageList", new ArrayList<Message>());
-		}
 
-		// Recovering the message List from the session
-		ArrayList messageList = (ArrayList) session.getAttribute("messageList");
+		// Getting the message list
+		List<Message> messageList = listMessages();
 
 		// Creating a new message
 		Message message = new Message();
@@ -37,17 +160,8 @@ public class MessageController extends HttpServlet
 		message.setMagazines(request.getParameter("magazines") != null);
 		message.setOther(request.getParameter("other") != null);
 
-		// Adding a new message to the system
-		messageList.add(message);
-
-		// Sorting the Messages by date
-		Collections.sort(messageList);
-
-		// Updating the message list
-		session.setAttribute("messageList", messageList);
-
-		// Creating the url
-		String url = "index.jsp";
+		// Adding a new message to the database
+		addMessage(message);
 	
 		try
 		{
@@ -63,32 +177,44 @@ public class MessageController extends HttpServlet
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response){
 		
-		String url = null;
+		String url = "error.jsp";
+
+		try
+		{
+        	factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+        }
+        catch (Throwable ex)
+        { 
+        	System.err.println("Failed to create sessionFactory object." + ex);
+        	throw new ExceptionInInitializerError(ex);
+       	}
+
+		// Getting the message list
+		List<Message> messageList = listMessages();
 
 		// Loading current session
 		HttpSession session = request.getSession(true);
-		// if there is no message list create one
-		if(session.getAttribute("messageList") == null)
-		{
-			session.setAttribute("messageList", new ArrayList<Message>());
-		}
-
-		// Recovering the message List from the session
-		ArrayList messageList = (ArrayList) session.getAttribute("messageList");
 
 		// Checking the request type
-		if(request.getParameter("action").toString().equals("get"))
+		if(request.getParameter("action").toString().equals("getMessageList"))
+		{
+			// Sorting the Messages by date
+			//Collections.sort(messageList);
+
+			// Updating the message list
+			session.setAttribute("messageList", messageList);
+
+			url = "messageList.jsp";
+		}
+		else if(request.getParameter("action").toString().equals("get"))
 		{
 			// Getting the current id
 			int id = Integer.parseInt(request.getParameter("id").toString());
 
-			Message message = (Message) messageList.get(id);
+			Message message = (Message) getMessage(messageList, id);
 
 			// Marking as read
-			message.setRead(true);
-
-			// Updating the message list
-			session.setAttribute("messageList", messageList);
+			updateReadStatus(id, true);
 
 			// Saving the message info on session
 			session.setAttribute("get", message);
@@ -103,42 +229,25 @@ public class MessageController extends HttpServlet
 			int id = Integer.parseInt(request.getParameter("id"));
 			
 			// Removing the client
-			messageList.remove(id);
+			deleteMessage(id);
 
-			// Saving the updated message list
-			session.setAttribute("messageList", messageList);
-			
 			// Creating the url
 			url = "messageList.jsp";
 		}
 		// If action is delete multiple entries
 		else if(request.getParameter("action").toString().equals("mdel"))
 		{
-			String mdel;
-			ArrayList<Message> toBeDeleted = new ArrayList<Message>();
+			Enumeration enumeration = request.getParameterNames();
+        	while (enumeration.hasMoreElements()) {
+            	String parameterName = (String) enumeration.nextElement();
+            	if(parameterName.contains("mdel"))
+            	{
+            		parameterName = parameterName.replace("mdel", "");
+            		int id = Integer.parseInt(parameterName);
+            		deleteMessage(id);
+            	}
+        	}
 
-			for(int i = 0; i < messageList.size(); i++)
-			{
-				// Checking if there are any mdel0, mdel1, mdel2...
-				mdel = request.getParameter("mdel" + i);
-				if(mdel != null)
-				{
-					// adding the message to the deletion array
-					toBeDeleted.add( (Message) messageList.get(i));
-					// This is necessary because the indexes change if we delete the message here
-				}
-			}
-
-			// Deleting itens
-			for(int i = 0; i < toBeDeleted.size(); i++)
-			{
-				// Safely removing users
-				messageList.remove(toBeDeleted.get(i));
-			}
-
-			// Updating message list
-			session.setAttribute("messageList", messageList);
-			
 			// Creating the url
 			url = "messageList.jsp";
 

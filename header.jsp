@@ -24,7 +24,7 @@
                             <%-- Admin --%>
                             <c:when test="${currentUser.administrator}">
                                 <li><a href="/Projeto/hotel/RegisterController?action=getClientList">Accounts</a></li>
-                                <li><a href="messageList.jsp">Messages</a></li>
+                                <li><a href="/Projeto/hotel/MessageController?action=getMessageList">Messages</a></li>
                             </c:when>
 
                             <%-- Client --%>

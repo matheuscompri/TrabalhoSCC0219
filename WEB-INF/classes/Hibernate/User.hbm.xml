@@ -30,4 +30,22 @@
         <property column="reservation_children" name="children"/>
         <property column="reservation_babies" name="babies"/>
     </class>
+
+    <class name="hotel.Message" table="messages">
+        <id column="messsage_id" name="id">
+            <generator class="native"/>
+        </id>
+        <property column="message_name" name="name"/>
+        <property column="message_email" name="email"/>
+        <property column="message_phone" name="phone"/>
+        <property column="message_readStatus" name="read"/>
+        <property column="message_newspaper" name="newspaper"/>
+        <property column="message_recomendation" name="recomendation"/>
+        <property column="message_socialNetworks" name="socialNetworks"/>
+        <property column="message_googleSearch" name="googleSearch"/>
+        <property column="message_magazines" name="magazines"/>
+        <property column="message_others" name="other"/>
+        <property column="message_content" name="message"/>
+        <property column="message_date" name="date"/>
+    </class>
 </hibernate-mapping>
