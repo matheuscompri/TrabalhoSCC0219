@@ -4,14 +4,18 @@ import java.util.*;
 
 public class Reservation
 {
+	private int id;
 	// User
 	private User client;
 
+	// userId
+	private int clientId;
+
 	// Arrival
-	private Calendar arrival;
+	private Date arrival;
 
 	// Departure
-	private Calendar departure;
+	private Date departure;
 
 	//number of people
 	private int adults;
@@ -20,15 +24,24 @@ public class Reservation
 
 
 	// Setters
-	public void setClient(User client){
-		this.client = client;
+	public void setId(int id){
+		this.id = id;
 	}
 
-	public void setArrival(Calendar arrival){
+	public void setClient(User client){
+		this.client = client;
+		this.clientId = client.getId();
+	}
+
+	public void setClientId(int clientId){
+		this.clientId = clientId;
+	}
+
+	public void setArrival(Date arrival){
 		this.arrival = arrival;
 	}
 
-	public void setDeparture(Calendar departure){
+	public void setDeparture(Date departure){
 		this.departure = departure;
 	}
 
@@ -45,15 +58,23 @@ public class Reservation
 	}
 
 	// Getters
+	public int getId(){
+		return this.id;
+	}
+
 	public User getClient(){
 		return this.client;
 	}
-
-	public Calendar getArrival(){
+	
+	public int getClientId(){
+		return this.clientId;
+	}
+	
+	public Date getArrival(){
 		return this.arrival;
 	}
 
-	public Calendar getDeparture(){
+	public Date getDeparture(){
 		return this.departure;
 	}
 

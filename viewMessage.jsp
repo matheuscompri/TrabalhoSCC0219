@@ -22,47 +22,10 @@
     <c:if test="${currentUser.administrator != true }">
         <c:redirect url="permissionDenied.jsp" />
     </c:if>
-	<header>
-        <div class="navbarLogo">Lithium Hotel</div>
-        <nav class="navbar">
-            <ul>
-                <%-- Changing the nav bar according to the user --%>
-                <c:choose>
-
-                    <%-- Guest user (not logged in) --%>
-                    <c:when test="${currentUser.name == null}">
-                        <li><spam class="username">Guest</spam></li>
-                        <li><a href="index.jsp">Hotel</a></li>                        
-                        <li><a href="register.jsp">Register</a></li>
-                        <li><a href="login.jsp">Login</a></li>
-                        <li><a href="contact.jsp">Contact</a></li>
-                    </c:when>
-                    
-                    <%-- Authenticated user--%>
-                    <c:otherwise>
-                        <li><spam class="username">${currentUser.name}</spam></li>
-                        <li><a href="/Projeto/hotel/LoginController?action=logout">Logout</a></li>
-                        <li><a href="reservationList.jsp">Reservations</a></li>
-                        
-                        <c:choose>
-                            <%-- Admin --%>
-                            <c:when test="${currentUser.administrator}">
-                                <li><a href="clientList.jsp">Accounts</a></li>
-                                <li><a href="messageList.jsp">Messages</a></li>
-                            </c:when>
-
-                            <%-- Client --%>
-                            <c:otherwise>
-                                <li><a href="index.jsp">Account</a></li>
-                                <li><a href="contact.jsp">Contact</a></li>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:otherwise>
-                </c:choose>
-            </ul>
-        </nav>
-    </header>
-
+	
+    <%-- including the headers --%>
+    <%@include file="header.jsp" %>
+    
      <div class="main">
         <section class="registerSection">
 			<h1>Message Details</h1>

@@ -310,25 +310,6 @@ public class RegisterController extends HttpServlet
 		// If action is delete multiple entries
 		else if(request.getParameter("action").toString().equals("mdel"))
 		{
-			String mdel;
-			ArrayList<User> toBeDeleted = new ArrayList<User>();
-	
-			// Serach results ArrayList
-			ArrayList<User> searchResults;
-
-			// if there is no searchResults create one
-			if(session.getAttribute("searchResults") == null)
-			{
-				searchResults = new ArrayList<User>();
-				session.setAttribute("searchResults", searchResults);
-			}
-
-			// Recovering the client List from the session
-			searchResults = (ArrayList) session.getAttribute("searchResults");
-
-			// Verifying if it came from searchResults.jsp
-			boolean isSearchResult = request.getParameter("searchResults") != null;
-
 			Enumeration enumeration = request.getParameterNames();
         	while (enumeration.hasMoreElements()) {
             	String parameterName = (String) enumeration.nextElement();

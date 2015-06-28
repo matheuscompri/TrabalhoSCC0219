@@ -17,5 +17,17 @@
         <property column="user_password" name="password"/>
         <property column="user_creationDate" name="creationDate"/>
         <property column="user_administrator" name="administrator"/>
-    </class>      
+    </class>
+
+    <class name="hotel.Reservation" table="reservations">
+        <id column="reservation_id" name="id">
+            <generator class="native"/>
+        </id>
+        <property column="reservation_clientId" name="clientId"/>
+        <property column="reservation_arrival" name="arrival"/>
+        <property column="reservation_departure" name="departure"/>
+        <property column="reservation_adults" name="adults"/>
+        <property column="reservation_children" name="children"/>
+        <property column="reservation_babies" name="babies"/>
+    </class>
 </hibernate-mapping>
