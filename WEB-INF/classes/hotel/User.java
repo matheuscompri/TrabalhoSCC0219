@@ -99,6 +99,9 @@ public class User implements Comparable<User>
 		this.creationDate = new Date();
 	}
 
+	public void setCreationDate(Date date){
+		this.creationDate = date;
+	}
 
 	// Getters
 	public int getId(){

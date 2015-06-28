@@ -15,6 +15,7 @@
         <property column="user_postalCode" name="postalCode"/>
         <property column="user_email" name="email"/>
         <property column="user_password" name="password"/>
+        <property column="user_creationDate" name="creationDate"/>
         <property column="user_administrator" name="administrator"/>
     </class>      
 </hibernate-mapping>
