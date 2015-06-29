@@ -279,22 +279,8 @@ public class ReservationController extends HttpServlet
 		// Session
 		HttpSession session = request.getSession();
 
-		if(request.getParameter("action").toString().equals("getReservationList"))
-		{
-			for(Reservation res : reservationList)
-			{
-				User client = getUser(clientList, res.getClientId());
-				res.setClient(client);
-			}
-
-			// Getting all reservation and seding then to view 
-			session.setAttribute("reservationList", reservationList);
-			// New Url
-			url = "reservationList.jsp";
-
-		}
 		// Checking if the request is to get a reservation
-		else if(request.getParameter("action").toString().equals("get"))
+		if(request.getParameter("action").toString().equals("get"))
 		{
 			// Getting the current id
 			int id = Integer.parseInt(request.getParameter("id").toString());

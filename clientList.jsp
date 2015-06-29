@@ -1,4 +1,3 @@
-<%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@page language="java" contentType="text/html" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
@@ -31,7 +30,7 @@
 
      <div class="main">
         <section class="registerSection">
-        
+
 			<%-- recuperando listaClientes da sessao --%>
 			<h1>Search by name:</h1>
 			<form action="/Projeto/hotel/RegisterController" method="GET">

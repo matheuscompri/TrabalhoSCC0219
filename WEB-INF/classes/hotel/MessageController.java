@@ -195,17 +195,7 @@ public class MessageController extends HttpServlet
 		HttpSession session = request.getSession(true);
 
 		// Checking the request type
-		if(request.getParameter("action").toString().equals("getMessageList"))
-		{
-			// Sorting the Messages by date
-			//Collections.sort(messageList);
-
-			// Updating the message list
-			session.setAttribute("messageList", messageList);
-
-			url = "messageList.jsp";
-		}
-		else if(request.getParameter("action").toString().equals("get"))
+		if(request.getParameter("action").toString().equals("get"))
 		{
 			// Getting the current id
 			int id = Integer.parseInt(request.getParameter("id").toString());

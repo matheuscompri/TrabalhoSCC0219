@@ -272,15 +272,7 @@ public class RegisterController extends HttpServlet
 		HttpSession session = request.getSession();
 
 		// Checking the request type
-		// If the action is edit, get info from client (used in editClient.jsp)
-		if(request.getParameter("action").toString().equals("getClientList"))
-		{
-			// Saving the client List into the session
-			session.setAttribute("clientList", clientList);
-
-			url = "clientList.jsp";
-		}
-		else if(request.getParameter("action").toString().equals("get"))
+		if(request.getParameter("action").toString().equals("get"))
 		{
 			// Getting the current id
 			int id = Integer.parseInt(request.getParameter("id").toString());
