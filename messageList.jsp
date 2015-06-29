@@ -1,5 +1,6 @@
 <%@page language="java" contentType="text/html" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <%-- Fixing the context for dispatcher calls --%>
@@ -29,26 +30,33 @@
     
      <div class="main">
         <section class="registerSection">
-			<jsp:useBean id="messageList" class="java.util.ArrayList" scope="session" />
 
 			<h1>Message List</h1>
+			
+			<%-- Opening database connection --%>
+		    <sql:setDataSource var="snapshot" driver="org.postgresql.Driver" url="jdbc:postgresql://localhost:5432/postgres" user="postgres"  password="postgres"/>
+			
+			<%-- Creating the query --%>
+		    <sql:query dataSource="${snapshot}" var="result">
+				SELECT * from messages;
+			</sql:query>
 
 			<form action="/Projeto/hotel/MessageController" method="GET">
 				<table>
 					<tr>
-						<td><b></b></td>
-						<td><b>Read</b></td>
-						<td><b>Name</b></td>
-						<td><b>Email</b></td>
-						<td></td>
-						<td></td>
+						<th></th>
+						<th><b>Read</b></th>
+						<th><b>Name</b></th>
+						<th><b>Email</b></th>
+						<th></th>
+						<th></th>
 					</tr>
-					<c:forEach var="message" items="${messageList}" varStatus="status">
+					<c:forEach var="row" items="${result.rows}">
 						<tr>
-							<td><input type="checkbox" name="mdel${message.id}" /></td>
+							<td><input type="checkbox" name="mdel${row.message_id}" /></td>
 							<td>
 								<c:choose>
-									<c:when test="${message.read}">
+									<c:when test="${row.message_readStatus == true}">
 										<input type="checkbox" disabled checked />
 									</c:when>
 									<c:otherwise>
@@ -56,10 +64,10 @@
 									</c:otherwise>
 								</c:choose>
 							</td>
-							<td>${message.name}</td>
-							<td>${message.email}</td>
-							<td><a href="/Projeto/hotel/MessageController?action=get&id=${message.id}">Details</a></td>
-							<td><a href="/Projeto/hotel/MessageController?action=del&id=${message.id}">Remove</a></td>
+							<td>${row.message_name}</td>
+							<td>${row.message_email}</td>
+							<td><a href="/Projeto/hotel/MessageController?action=get&id=${row.message_id}">Details</a></td>
+							<td><a href="/Projeto/hotel/MessageController?action=del&id=${row.message_id}">Remove</a></td>
 						</tr>
 					</c:forEach>
 				</table>

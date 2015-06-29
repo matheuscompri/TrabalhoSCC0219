@@ -58,9 +58,6 @@ public class MessageController extends HttpServlet
 	    	tx = session.beginTransaction();
 	    	messageList = session.createQuery("from Message order by message_date desc").list(); 
 	     	tx.commit();
-
-	     	return messageList;
-
 	  	}
 	  	catch (HibernateException e)
 	  	{
@@ -173,6 +170,8 @@ public class MessageController extends HttpServlet
 		{
 			e.printStackTrace();
 		}
+		
+		factory.close();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response){
@@ -267,5 +266,7 @@ public class MessageController extends HttpServlet
 		{
 			e.printStackTrace();
 		}
+
+		factory.close();
 	}
 }

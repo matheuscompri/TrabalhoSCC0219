@@ -53,9 +53,6 @@ public class LoginController extends HttpServlet
 		        System.out.println("Name: " + cl.getName()); 
 	    	}
 	     	tx.commit();
-
-	     	return clientList;
-
 	  	}
 	  	catch (HibernateException e)
 	  	{
@@ -66,6 +63,7 @@ public class LoginController extends HttpServlet
 	  	{
 	     	session.close(); 
 	  	}
+	  	
 	  	return clientList;
 	}
 
@@ -151,7 +149,8 @@ public class LoginController extends HttpServlet
 		catch(Exception e)
 		{
 			e.printStackTrace();
-		}	
+		}
+		factory.close();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response){
@@ -184,6 +183,8 @@ public class LoginController extends HttpServlet
 		catch(Exception e)
 		{
 			e.printStackTrace();
-		}	
+		}
+
+		factory.close();
 	}
 }

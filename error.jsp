@@ -26,7 +26,7 @@
      <div class="main">
         <section class="registerSection">
 			<h1>Internal Error</h1>
-			The action method that you have used doesn't exist.
+			<c:out value="${requestScope.errormsg }"/><br />
 		</section>
 	</main>
 	</body>

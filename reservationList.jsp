@@ -1,5 +1,6 @@
 <%@page language="java" contentType="text/html" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <%-- Fixing the context for dispatcher calls --%>
@@ -33,47 +34,61 @@
     <%@include file="header.jsp" %>
 
     <div class="main">
-    <section class="registerSection">
-	<%-- recuperando listaClientes da sessao --%>
-	<jsp:useBean id="clientList" class="java.util.ArrayList" scope="session"/>
-	<jsp:useBean id="reservationList" class="java.util.ArrayList" scope="session"/>
-	
-	<h1>Reservation List</h1>
+	    <section class="registerSection">
 
-	Reservations for all clients:
-	
-	<%-- percorrendo lista de clientes com EL (Expression Language) --%>
-	<form action="/Projeto/hotel/ReservationController" method="GET">
-		<table border=2>
-			<tr>
-				<td><b>Selected</b></td>
-				<td><b>Client Name</b></td>
-				<td><b>Arrival</b></td>
-				<td><b>Departure</b></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<c:forEach var="reservation" items="${reservationList}" varStatus="status">
-				<c:if test = "${currentUser.name == reservation.client.name || currentUser.administrator == true }">
+			<h1>Reservation List</h1>
+			
+			<%-- Opening database connection --%>
+		    <sql:setDataSource var="snapshot" driver="org.postgresql.Driver" url="jdbc:postgresql://localhost:5432/postgres" user="postgres"  password="postgres"/>
+			
+			<%-- Creating the query --%>
+			<c:choose>
+				<%-- Checking if the user is the admin --%>
+				<c:when test="${currentUser.email == 'admin@hotel.com'}">
+					<sql:query dataSource="${snapshot}" var="result">
+						select * from reservations join users on reservation_clientId = user_id;
+					</sql:query>
+				</c:when>
+				<%-- Otherwise is a regular user and is only able to see his own reservations --%>
+				<c:otherwise>
+					<sql:query dataSource="${snapshot}" var="result">
+						select * from reservations join users on reservation_clientId = user_id where reservation_clientId = ${currentUser.id};
+					</sql:query>
+				</c:otherwise>
+			</c:choose>
+		    
+			Reservations for all clients:
+			
+			<%-- percorrendo lista de clientes com EL (Expression Language) --%>
+			<form action="/Projeto/hotel/ReservationController" method="GET">
+				<table border=2>
 					<tr>
-						<td><input type="checkbox" name="mdel${reservation.id}"</td>
-						<td>${reservation.client.name}</td>
-						<td>${reservation.arrival}</td>
-						<td>${reservation.departure}</td>
-						<td><a href="/Projeto/hotel/ReservationController?action=get&id=${reservation.id}">Details</a></td>
-						<td><a href="/Projeto/hotel/ReservationController?action=del&id=${reservation.id}">Remove</a></td>
+						<td></td>
+						<td><b>Client Name</b></td>
+						<td><b>Arrival</b></td>
+						<td><b>Departure</b></td>
+						<td></td>
+						<td></td>
 					</tr>
-				</c:if>
-			</c:forEach>
-		</table>
-		<input type="hidden" name="action" value="mdel">
-		<input type="submit" class="submit_button" value="Delete Selected">
-		<input type="button" class="reset_button" value="Add Reservation" onClick="location.href = '/Projeto/reservation.jsp'" >
-	</form>
-	<div class="clear"></div>
-    </section>
-    </div>
-	</body>
+					<c:forEach var="row" items="${result.rows}">
+						<tr>
+							<td><input type="checkbox" name="mdel${row.reservation_id}"</td>
+							<td>${row.user_name}</td>
+							<td>${row.reservation_arrival}</td>
+							<td>${row.reservation_departure}</td>
+							<td><a href="/Projeto/hotel/ReservationController?action=get&id=${row.reservation_id}">Details</a></td>
+							<td><a href="/Projeto/hotel/ReservationController?action=del&id=${row.reservation_id}">Remove</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+				<input type="hidden" name="action" value="mdel">
+				<input type="submit" class="submit_button" value="Delete Selected">
+				<input type="button" class="reset_button" value="Add Reservation" onClick="location.href = '/Projeto/reservation.jsp'" >
+			</form>
+			<div class="clear"></div>
+	    </section>
+	</div>
+</body>
 </html>
 
 

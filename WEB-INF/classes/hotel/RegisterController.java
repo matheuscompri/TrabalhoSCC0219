@@ -9,6 +9,8 @@ import java.text.*;
 import org.hibernate.*;
 import org.hibernate.cfg.*;
 
+import javax.persistence.*;
+
 public class RegisterController extends HttpServlet
 {
 	private static SessionFactory factory;
@@ -25,7 +27,7 @@ public class RegisterController extends HttpServlet
 	}
 
 	// Method to create an user in the database 
-	public Integer addUser(User user)
+	public Integer addUser(User user) 
 	{
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -40,6 +42,7 @@ public class RegisterController extends HttpServlet
 		{
 	    	if (tx!=null) tx.rollback();
 	    	e.printStackTrace();
+	    	throw new RollbackException("Error " + e.getMessage());
 	  	}
 	  	finally
 	  	{
@@ -192,10 +195,17 @@ public class RegisterController extends HttpServlet
 			client.setCreationDate();
 
 			// Adding a new client
-			addUser(client);
-
-			// Creating the url
-			url = "login.jsp";
+			try
+			{
+				addUser(client);
+				// Creating the url
+				url = "login.jsp";
+			}
+			catch(RollbackException e)
+			{
+				url = "error.jsp";
+				request.setAttribute("errormsg", "Email already taken! Please choose another one...");
+			}
 		}
 		else if(request.getParameter("action").toString().equals("edit"))
 		{
@@ -235,7 +245,9 @@ public class RegisterController extends HttpServlet
 		catch(Exception e)
 		{
 			e.printStackTrace();
-		}	
+		}
+
+		factory.close();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -404,5 +416,6 @@ public class RegisterController extends HttpServlet
 		{
 			e.printStackTrace();
 		}
+		factory.close();
 	}
 }

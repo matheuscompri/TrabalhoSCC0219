@@ -70,9 +70,6 @@ public class ReservationController extends HttpServlet
 	    	tx = session.beginTransaction();
 	    	reservationList = session.createQuery("FROM Reservation").list(); 
 	     	tx.commit();
-
-	     	return reservationList;
-
 	  	}
 	  	catch (HibernateException e)
 	  	{
@@ -233,6 +230,10 @@ public class ReservationController extends HttpServlet
 					// Creating the url
 					url = "reservationList.jsp";
 				}
+				else
+				{
+					request.setAttribute("errormsg", "There is another reservation in this date. Please choose another one...");
+				}
 
 			}
 			catch(ParseException e)
@@ -250,6 +251,8 @@ public class ReservationController extends HttpServlet
 		{
 			e.printStackTrace();
 		}	
+
+		factory.close();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -353,5 +356,7 @@ public class ReservationController extends HttpServlet
 		{
 			e.printStackTrace();
 		}
+
+	factory.close();	
 	}
 }

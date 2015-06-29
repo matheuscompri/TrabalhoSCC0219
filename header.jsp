@@ -18,13 +18,13 @@
                     <c:otherwise>
                         <li><spam class="username">${currentUser.name}</spam></li>
                         <li><a href="/Projeto/hotel/LoginController?action=logout">Logout</a></li>
-                        <li><a href="/Projeto/hotel/ReservationController?action=getReservationList">Reservations</a></li>
+                        <li><a href="/Projeto/reservationList.jsp">Reservations</a></li>
                         
                         <c:choose>
                             <%-- Admin --%>
                             <c:when test="${currentUser.administrator}">
-                                <li><a href="/Projeto/hotel/RegisterController?action=getClientList">Accounts</a></li>
-                                <li><a href="/Projeto/hotel/MessageController?action=getMessageList">Messages</a></li>
+                                <li><a href="/Projeto/clientList.jsp">Accounts</a></li>
+                                <li><a href="/Projeto/messageList.jsp">Messages</a></li>
                             </c:when>
 
                             <%-- Client --%>

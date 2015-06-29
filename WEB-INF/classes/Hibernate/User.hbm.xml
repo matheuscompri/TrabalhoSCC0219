@@ -13,7 +13,7 @@
         <property column="user_city" name="city"/>
         <property column="user_state" name="state"/>
         <property column="user_postalCode" name="postalCode"/>
-        <property column="user_email" name="email"/>
+        <property column="user_email" name="email" unique="true"/>
         <property column="user_password" name="password"/>
         <property column="user_creationDate" name="creationDate"/>
         <property column="user_administrator" name="administrator"/>
@@ -32,7 +32,7 @@
     </class>
 
     <class name="hotel.Message" table="messages">
-        <id column="messsage_id" name="id">
+        <id column="message_id" name="id">
             <generator class="native"/>
         </id>
         <property column="message_name" name="name"/>
